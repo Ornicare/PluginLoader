@@ -1,0 +1,17 @@
+﻿Une dépendance entre PluginBase et PluginManager, à discuter
+Récupération du nom du jar : ... le dossier plugins n'est pas fixe....
+Les dépendances cycliques ! Pas encore vérifiées.
+Lazy et co : à revoir, pas grand sens pour le runnable par exemple. En fait si.
+
+Validate : ne pas tout quitter, gérer les exceptions.
+
+CHARGER des bins (class) directement
+Exporter dans un dossier le .xml
+
+Commencer à implémenter le xml.
+
+JAVADOC
+
+Dependancies = dependencies.
+
+Demander un plugin par type.
