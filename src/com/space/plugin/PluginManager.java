@@ -99,6 +99,15 @@ public class PluginManager {
 		loadedPlugins.add(plugin);
 	}
 
+	/**
+	 * Search to find class into plugin's dependencies.
+	 * 
+	 * @param name
+	 * @param dependanciesNames
+	 * @return
+	 * @throws ClassNotFoundException
+	 * @throws Exception
+	 */
 	public Class<?> findClass(String name, String... dependanciesNames) throws ClassNotFoundException, Exception {
 		
 		List<String> dependanciesNamesList = new ArrayList<String>(Arrays.asList(dependanciesNames));
