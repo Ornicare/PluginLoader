@@ -1,13 +1,13 @@
 
-Réécrire le grouper !!!!!
+//Réécrire le grouper !!!!!
 
-!Chaque plugin est DEUX fois dans la liste !
+//!Chaque plugin est DEUX fois dans la liste !
 
 
 
 //﻿Une dépendance entre PluginBase et PluginManager, à discuter
 //Récupération du nom du jar : ... le dossier plugins n'est pas fixe....
-Les dépendances cycliques ! Pas encore vérifiées.
+//Les dépendances cycliques ! Pas encore vérifiées.  => osef : impossible � faire involontairement
 //Lazy et co : à revoir, pas grand sens pour le runnable par exemple. En fait si.
 
 Validate : ne pas tout quitter, gérer les exceptions.
@@ -15,7 +15,10 @@ Validate : ne pas tout quitter, gérer les exceptions.
 CHARGER des bins (class) directement
 Exporter dans un dossier le .xml
 
-TOUJOURS utiliser le NOM du PLUGIN (et pas celui du jar...)
+
+//A priori r�gl� dans la foul�e.
+///!\ Le nom du jar est utilisé ! Utiliser le nom du plugin !
+//TOUJOURS utiliser le NOM du PLUGIN (et pas celui du jar...)
 
 //Commencer à implémenter le xml.
 
@@ -23,9 +26,13 @@ JAVADOC
 
 Dependancies = dependencies.
 
+Load : v�rifier si plusieurs fois le m�me nom.
+
 Demander un plugin par type.
 
-Ajout d'un attribut : launch to start.
+Le pb du dossier linux/windows (plugins)
+
+//Ajout d'un attribut : launch to start.
 
 Ajouter un proxy lors d'une r�f�rence vers un objet d'un autre plugin.
 
@@ -35,10 +42,10 @@ On n'impl�mente plus IPluginRunnable : ou extend une classe qui l'impl�mente
 Contentprovider impl�mente donneMoiUnObject => lazy l� dessus. De base le getObject(nom_du_plugin) renvoie this. (r�cup�re une instance de la classe principale)
 
 
-/!\ Le nom du jar est utilisé ! Utiliser le nom du plugin !
+Classes statiques ?
 
 Controler l'extension du fichier
 
 GetObject : args ?
 
-faire getPluginList => pb, comment connaitre le plugin manager ?
+//faire getPluginList => pb, comment connaitre le plugin manager ?

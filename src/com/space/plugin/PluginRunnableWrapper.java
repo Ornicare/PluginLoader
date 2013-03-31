@@ -21,11 +21,14 @@ public class PluginRunnableWrapper extends PluginBase implements IPluginRunnable
 	 */
 	@Override
 	public void run() throws Exception   {
-		if(instance == null || classToLoad ==null || !singleton) createRunMethod();
+		if(instance == null || classToLoad == null || method == null || !singleton) createRunMethod();
 
     	/*for(URL path : classLoader.getURLs()) {
     		System.out.println(path.getPath());
     	}*/
+		
+		//System.out.println(instance);
+		
 		method.invoke(instance);
 	}
 	
@@ -38,7 +41,7 @@ public class PluginRunnableWrapper extends PluginBase implements IPluginRunnable
 	protected void createRunMethod() throws Exception {
 		createInstance();
 		method = classToLoad.getDeclaredMethod("run");
-		System.out.println(method.getReturnType().getName());
+		//System.out.println(method.getReturnType().getName());
 	}
 
 }

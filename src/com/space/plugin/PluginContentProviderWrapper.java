@@ -1,6 +1,10 @@
 package com.space.plugin;
 
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Proxy;
 import java.util.Properties;
+
+import com.space.proxy.InstanceHandler;
 
 /**
  * Just a non-runnable plugin.
@@ -21,6 +25,11 @@ public class PluginContentProviderWrapper extends PluginBase implements IPluginC
 	@Override
 	public Object getObject(Object... args) {
 		return null;
+	}
+	
+	private Object getProxy(Class<?> clazz, boolean lazy) {
+		InvocationHandler h = new InstanceHandler(clazz, lazy);
+		return Proxy.newProxyInstance(ClassLoader.getSystemClassLoader(), clazz.getInterfaces(), h);
 	}
 
 }

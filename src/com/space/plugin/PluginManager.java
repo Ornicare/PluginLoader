@@ -1,7 +1,6 @@
 package com.space.plugin;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -76,6 +75,7 @@ public class PluginManager {
             	}
         	}
         }
+        
         createDependenciesGroups();
         createGroupedClassLoaders(directory.getAbsolutePath());
         
@@ -136,77 +136,64 @@ public class PluginManager {
      * Create dependencies group.
      */
     private void createDependenciesGroups() {
-    	/**
-    	 * Plugins with their dependencies
-    	 */
-    	Map<PluginBase,String[]> pluginWithDependencies = new HashMap<PluginBase,String[]>();
-    	
-    	/**
-    	 * List of slaves plugins
-    	 */
-    	Map<PluginBase,ArrayList<String>> pluginSonsDependencies = new HashMap<PluginBase,ArrayList<String>>();
-    	
-    	/**
-    	 * List of plugins groups.
-    	 */
-    	Map<PluginBase,ArrayList<String>> pluginGroupDependencies = new HashMap<PluginBase,ArrayList<String>>();
-    	
-    	/**
-    	 * Initialize the slve list.
+   	
+    	List<ArrayList<String>> groupedLoadedPluginsStringVersion = new ArrayList<ArrayList<String>>();
+
+    	/*
+    	 * Create grouped list.
     	 */
     	for(PluginBase pB: loadedPlugins) {
-    		pluginSonsDependencies.put(pB, new ArrayList<String>());
-    	}
-    	
-    	/**
-    	 * Create slave list.
-    	 */
-    	for(PluginBase pB: loadedPlugins) {
-    		String[] pluginDependencies = pB.getDependancies();
-    		pluginWithDependencies.put(pB, pluginDependencies);
-    		for(String pBDep : pluginDependencies) {
-    			PluginBase tempPB = getPlugin(pBDep);
-    			
-    			ArrayList<String> tempPBL = pluginSonsDependencies.get(tempPB);
-    			tempPBL.add(pB.getName());
-    			
-    			pluginSonsDependencies.put(tempPB, tempPBL);
-    		}
-    	}
-    	
-    	/**
-    	 * Create group list.
-    	 */
-    	for(PluginBase pB: loadedPlugins) {
-    		List<String> dependencies = new ArrayList<String>(Arrays.asList(pluginWithDependencies.get(pB)));
-    		dependencies.addAll(pluginSonsDependencies.get(pB));
-    		
-    		pluginGroupDependencies.put(pB, (ArrayList<String>) dependencies);
-    	}
-    	
-    	/**
-    	 * Dependencies group given by Id
-    	 */
-    	Map<String,Integer> pluginGroupId = new HashMap<String,Integer>();
-    	
-    	for(PluginBase pB : pluginWithDependencies.keySet()) {
+    		String pluginName = pB.getName();
     		boolean find = false;
-    		for(String dependencie : pluginWithDependencies.get(pB)) {
-    			if(pluginGroupId.containsKey(dependencie) && !find) {
-    				Integer groupId = pluginGroupId.get(dependencie);
-    				ArrayList<PluginBase> tempList = (ArrayList<PluginBase>) groupedLoadedPlugins.get(groupId);
-    				tempList.add(pB);
-    				
-    				groupedLoadedPlugins.set(groupId,tempList);
-    				pluginGroupId.put(pB.getName(), new Integer(groupId));
+    		for(int index = 0; index < groupedLoadedPluginsStringVersion.size() ; index++) {
+    			ArrayList<String> pluginGroup = groupedLoadedPluginsStringVersion.get(index);
+    			boolean dependencieAlreadyInList = false;
+    			for(String plugin : pB.getDependencies()) {
+					if(pluginGroup.contains(plugin)) dependencieAlreadyInList = true;
+				}
+    			if(pluginGroup.contains(pluginName) || dependencieAlreadyInList) {
+    				for(String plugin : pB.getDependencies()) {
+    					if(!pluginGroup.contains(plugin)) pluginGroup.add(plugin);
+    				}
+    				if(!pluginGroup.contains(pluginName)) pluginGroup.add(pluginName);
+        			groupedLoadedPluginsStringVersion.set(index, pluginGroup);
     				find = true;
     			}
     		}
     		if(!find) {
-    			groupedLoadedPlugins.add(new ArrayList<PluginBase>(Arrays.asList(pB)));
-    			pluginGroupId.put(pB.getName(), new Integer(groupedLoadedPlugins.size()-1));
+    			ArrayList<String> newGroup = new ArrayList<String>(Arrays.asList(pB.getDependencies()));
+    			newGroup.add(pluginName);
+    			groupedLoadedPluginsStringVersion.add(newGroup);
     		}
+    		
+        	/*int i = 0;
+        	for(ArrayList<String> pluginGroup : groupedLoadedPluginsStringVersion) {
+        		i++;
+        		for(String plugin : pluginGroup) {
+        			System.out.println("["+i+"] "+plugin);
+        		}
+        	}
+        	System.out.println("___________________________________");*/
     	}
+    	
+    	/*
+    	 * Transfrom it inti plugins
+    	 */
+    	for(ArrayList<String> pluginGroup : groupedLoadedPluginsStringVersion) {
+    		ArrayList<PluginBase> newGroup = new ArrayList<PluginBase>();
+    		for(String plugin : pluginGroup) {
+    			newGroup.add(getPlugin(plugin));
+    		}
+    		groupedLoadedPlugins.add(newGroup);
+    	}
+    	
+    	/*int i = 0;
+    	for(ArrayList<String> pluginGroup : groupedLoadedPluginsStringVersion) {
+    		i++;
+    		for(String plugin : pluginGroup) {
+    			System.out.println("["+i+"] "+plugin);
+    		}
+    	}*/
 	}
 
 	/**
@@ -227,8 +214,8 @@ public class PluginManager {
 	        	return config;
 			}
 		}
-		catch (IOException e1) {
-			System.out.println("Error while opening "+pluginJarName+". Is it a valid jar file ?");
+		catch (Throwable e1) {
+			System.out.println("Error while opening "+pluginJarName+". Is it a valid plugin jar file ?");
 			e1.printStackTrace();
 		}
 		return null;       
@@ -275,6 +262,12 @@ public class PluginManager {
 			if(plugin.getName().equals(name)) {
 				return plugin;
 			}
+		}
+		
+		try {
+			throw new Throwable("Plugin not found.");
+		} catch (Throwable e) {
+			e.printStackTrace();
 		}
 		return null;
 	}

@@ -16,28 +16,10 @@ public class Principale {
 	 * @throws Throwable 
 	 */
 	public static void main(String[] args) throws Throwable {
-		/*URLClassLoader child = new URLClassLoader(new URL[]{new URL("file:///"+System.getProperty("user.dir")+"/plugins/Test.jar")}, System.class.getClassLoader());
-		Class<?> classToLoad = Class.forName("snippet.Test", true, child);
-		Method method = classToLoad.getDeclaredMethod("run");
-		Object instance = classToLoad.newInstance ();
-		Object result = method.invoke (instance);*/
-		
-		
-		
-		//PluginManager pluginManager = new PluginManager(Thread.currentThread().getContextClassLoader());
-		
-		//Plugin test = new Plugin("plugins\\HelloWorld.jar",Thread.currentThread().getContextClassLoader(),pluginManager);
-
-		//System.out.println(test.getConfig().getProperty("main"));
-		//Plugin test2 = new Plugin("plugins\\test.jar",Thread.currentThread().getContextClassLoader(), pluginManager);
-		
-		//System.out.println("AA  T"+test.getJarName()+"T");
-		//System.out.println(test.getDependancies()[0]);
-		
-		//for(int i =0;i<10;i++)
-			//test.run();
-		//test2.run();
-
+		String directory = "plugins";
+		if(args.length>0) {
+			directory = args[0];
+		}
 		/*
 		 * Create the pluginManager
 		 */
@@ -51,8 +33,8 @@ public class Principale {
 		/*
 		 * Load the "plugins" folder.
 		 */
-		File pluginFolder = new File("plugins");
-		System.out.println(pluginFolder.getAbsolutePath());
+		File pluginFolder = new File(directory);
+		System.out.println("Plugins folder in use : "+pluginFolder.getAbsolutePath());
 		
 		pluginManager.preLoadPlugins(pluginFolder);
 		
@@ -60,26 +42,27 @@ public class Principale {
 		 * See groups of plugins dependencies.
 		 */
 		int id = 0;
+		System.out.println("\nDependencies groups (linked plugins) : ");
     	for(ArrayList<PluginBase> pBL : pluginManager.groupedLoadedPlugins) {
+    		System.out.println("Group "+id+" : ");
     		for(PluginBase pB : pBL) {
-        		System.out.println(pB.getName()+" ["+id+"]");
+        		System.out.println("    "+pB.getName()+" [jar_name = "+pB.getJarName()+"]");
         	}
+    		System.out.println();
     		id++;
     	}
 		
     	/*
-    	 * Run plugins 
+    	 * Run launchables plugins 
     	 */
-
-		//Grouped example
-		PluginRunnableWrapper helloWorld2 = (PluginRunnableWrapper) pluginManager.getPlugin("Executor");
-    	
-    	//Function example
-    	PluginRunnableWrapper helloWorld = (PluginRunnableWrapper) pluginManager.getPlugin("PluginLister");
-
-		
-		helloWorld.run();
-		helloWorld2.run();
+    	for(String pluginName : pluginManager.getPluginList()) {
+    		PluginBase pB = pluginManager.getPlugin(pluginName);
+    		if(pB.isLaunchable() && pB.getClass().isAssignableFrom(PluginRunnableWrapper.class)) {
+    			PluginRunnableWrapper runnablePB = (PluginRunnableWrapper) pB;
+    			System.out.println("Running : "+pB.getName());
+    			runnablePB.run();
+    		}
+    	}
 	}
 
 }

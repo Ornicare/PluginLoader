@@ -1,0 +1,161 @@
+% !TEX TS-program = pdflatex
+% !TEX encoding = UTF-8 Unicode
+
+% This is a simple template for a LaTeX document using the "article" class.
+% See "book", "report", "letter" for other types of document.
+
+\documentclass[11pt]{report} % use larger type; default would be 10pt
+
+\usepackage[utf8]{inputenc} % set input encoding (not needed with XeLaTeX)
+
+%%% Examples of Article customizations
+% These packages are optional, depending whether you want the features they provide.
+% See the LaTeX Companion or other references for full information.
+
+%%% PAGE DIMENSIONS
+\usepackage{geometry} % to change the page dimensions
+\geometry{a4paper} % or letterpaper (US) or a5paper or....
+% \geometry{margin=2in} % for example, change the margins to 2 inches all round
+% \geometry{landscape} % set up the page for landscape
+%   read geometry.pdf for detailed page layout information
+
+\usepackage{graphicx} % support the \includegraphics command and options
+
+% \usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
+
+%%% PACKAGES
+\usepackage{booktabs} % for much better looking tables
+\usepackage{array} % for better arrays (eg matrices) in maths
+\usepackage{paralist} % very flexible & customisable lists (eg. enumerate/itemize, etc.)
+\usepackage{verbatim} % adds environment for commenting out blocks of text & for better verbatim
+\usepackage{subfig} % make it possible to include more than one captioned figure/table in a single float
+
+%%%Personal packages
+\usepackage{moreverb}
+\usepackage{latexsym}
+
+% These packages are all incorporated in the memoir class to one degree or another...
+
+%%% HEADERS & FOOTERS
+\usepackage{fancyhdr} % This should be set AFTER setting up the page geometry
+
+
+
+
+\pagestyle{fancy} % options: empty , plain , fancy
+\renewcommand{\headrulewidth}{0pt} % customise the layout...
+\lhead{}\chead{}\rhead{}
+\lfoot{}\cfoot{\thepage}\rfoot{}
+
+%%% SECTION TITLE APPEARANCE
+\usepackage{sectsty}
+\allsectionsfont{\sffamily\mdseries\upshape} % (See the fntguide.pdf for font help)
+% (This matches ConTeXt defaults)
+
+%%% ToC (table of contents) APPEARANCE
+\usepackage[nottoc,notlof,notlot]{tocbibind} % Put the bibliography in the ToC
+\usepackage[titles,subfigure]{tocloft} % Alter the style of the Table of Contents
+\renewcommand{\cftsecfont}{\rmfamily\mdseries\upshape}
+\renewcommand{\cftsecpagefont}{\rmfamily\mdseries\upshape} % No bold!
+
+
+%%% END Article customizations
+
+%%% The "real" document content comes below...
+
+\title{Developer documentation}
+\author{\textsc{Wollenburger} Antoine}
+%\date{} % Activate to display a given date or no date (if empty),
+         % otherwise the current date is printed 
+
+\begin{document}
+\maketitle
+
+\chapter{Create your first plugin}
+
+The first thing you need is a new project. Name it at your conveniance.  For the example, we name it ``HelloWorld''.
+
+\section{Fix the Java Build Path}
+
+Secondly add ``PluginLoader.jar'' to the Java Build Path (right clic on th project, Properties, Java Build Path).
+\begin{figure}[h]
+	\caption{\label{buildpath} Fixing Java Build Path}
+	\centering
+	\includegraphics[width=0.8\textwidth]{images/BuildPath.PNG}
+\end{figure}
+
+\section{Saying ``Hello World''}
+
+Before creating a new class, you must create a new package. In this example we take ``com.ornicare.helloworld''. Then create a new class and make it an extend of PluginRunnable and create a run method : it's the hook for the platform. It must look like this : \begin{verbatimtab}package com.ornicare.helloworld;
+
+import com.space.plugin.PluginRunnable;
+
+public class MainClass extends PluginRunnable {
+	
+	@Override
+	public void run() {
+		System.out.println("Hello world !");
+	}
+}\end{verbatimtab}
+
+\section{Generate the propertie file}
+
+Create a new file named ``plugin.properties'' into the project. In this file add : 
+\begin{itemize}
+	\item The plugin name : ``name = HelloWorld"
+	\item The hook's class path : ``main = com.ornicare.helloworld.MainClass"
+	\item The runnable attribut : ``runnable = true"
+\end{itemize}
+
+\section{Exporting your first plugin}
+
+To run this, you need to create a jar of your plugin : ``File \textgreater{} Export \textgreater{} Java/JAR File". Put the created jar into the plugin directory and run the plugin loader.
+
+\chapter{Intricated plugins}
+
+\section{Using another plugin}
+
+For this example, we are going to use the ``CConsole'' plugin :  it's just a plugin to display the java console (and few other things). So put ``CConsole.jar" into the plugin directory. Add it to your project Java Build Path. And use it. For example : \begin{verbatimtab}package com.ornicare.helloworld;
+
+import cconsole.CConsole;
+
+import com.space.plugin.PluginRunnable;
+
+public class MainClass extends PluginRunnable {
+	
+	@Override
+	public void run() {
+		CConsole.load();
+		CConsole.println("Hello world !");
+	}
+}\end{verbatimtab}
+Then you need to add the following line to your properties file : ``depend = CConsole".
+
+\chapter{Make a regular ``plugin.properties"}
+
+You are allowed to use the following attributes : 
+\begin{itemize}
+	\item The plugin name : ``name = your\_plugin\_name"
+	\item The hook's class path : ``main = package.hook\_class\_name"
+	\item The runnable attribut : ``runnable = true$\backslash$false"
+	\item If you want a single instance : ``singleton = true$\backslash$false"
+	\item Make your plugin lazy : ``lazy = true$\backslash$false"
+	\item Indicate dependencies to others plugins : ``depend = plugin1, plugin2, ..."
+	\item Launch automatically : ``launch = true$\backslash$false". The plugin need to be runnable.
+\end{itemize}
+
+\chapter{Advanced functions}
+
+\section{Advanced functions for all plugins}
+
+\subsection{getPlugin}
+\subsection{getPluginList}
+
+\section{Advanced functions for a runnable plugin}
+
+\section{Advanced functions for a content provide plugin}
+
+\subsection{getObject}
+
+
+\end{document}

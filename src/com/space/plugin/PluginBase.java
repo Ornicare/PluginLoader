@@ -21,9 +21,10 @@ public abstract class PluginBase{
 	private String name;
 	protected boolean initialized = false;
 	private PluginManager pluginManager;
+	private boolean runInFirst = false;
 	
 	protected String mainClass;
-	protected boolean lazy;
+	protected boolean internalLazy;
 	protected boolean singleton;
 	protected boolean isRunnable;
 	private int groupId;
@@ -45,9 +46,16 @@ public abstract class PluginBase{
 		Validate.notNull(pluginJarName, "Jar name cannot be null !");
 		this.pluginJarName = pluginJarName;
 		this.pluginManager=pluginManager;
-		this.pluginManager.register(this);
 		this.config = config;
 		loadConfig(config);
+	}
+	
+	/**
+	 * Do we need to automatically run it ?
+	 * @return
+	 */
+	public boolean isLaunchable() {
+		return runInFirst;
 	}
 
 	/**
@@ -72,9 +80,10 @@ public abstract class PluginBase{
     	mainClass = config.getProperty("main");
     	if(config.getProperty("runnable").equals("true")) Validate.notNull(mainClass, getName()+" : Invalid main class in the properties file");
     	
-    	lazy = getPropertyBool("lazy");
+    	internalLazy = getPropertyBool("lazy");
     	singleton = getPropertyBool("singleton");
     	isRunnable = getPropertyBool("runnable");
+    	runInFirst = getPropertyBool("launch");
 		
 	}
 	
@@ -124,7 +133,7 @@ public abstract class PluginBase{
      */
     public String getName() {
     	if(name==null) this.name = config.getProperty("name");
-    	if(name==null) this.name = pluginJarName;
+    	Validate.notNull(name, pluginJarName+" : invalide properties file : name not found.");
     	return name;
     }
 
@@ -133,10 +142,15 @@ public abstract class PluginBase{
      * 
      * @return
      */
-	public String[] getDependancies() {
+	public String[] getDependencies() {
 		String rawDependancies = config.getProperty("depend");
 		String[] retour = null;
 		if(rawDependancies!=null) retour = config.getProperty("depend").split(",");
+		if(retour!=null) {
+			for(int i = 0 ; i < retour.length ; i++) {
+				retour[i] = retour[i].trim();
+			}
+		}
 		return retour==null?new String[0]:retour;
 	}
 
@@ -154,18 +168,18 @@ public abstract class PluginBase{
 	}
 
 	public Object getInstance() {
-		return instance==null?createInstance():instance;
+		return instance==null || !singleton ?createInstance():instance;
 	}
 
 	protected Object createInstance() {
 		
 		if(!initialized) initialize();
 		
-		if(lazy) this.initialized = true;
+		if(internalLazy) this.initialized = true;
 		
-    	for(URL path : classLoader.getURLs()) {
+    	/*for(URL path : classLoader.getURLs()) {
     		System.out.println(getName()+" "+path.getPath());
-    	}
+    	}*/
     	
 		
 
