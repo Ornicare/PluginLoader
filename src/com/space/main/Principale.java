@@ -1,9 +1,12 @@
 package com.space.main;
 
 import java.io.File;
+import java.util.ArrayList;
 
+import com.space.plugin.PluginBase;
+import com.space.plugin.PluginCommonMethods;
 import com.space.plugin.PluginManager;
-import com.space.plugin.PluginRunnable;
+import com.space.plugin.PluginRunnableWrapper;
 
 
 public class Principale {
@@ -18,7 +21,10 @@ public class Principale {
 		Method method = classToLoad.getDeclaredMethod("run");
 		Object instance = classToLoad.newInstance ();
 		Object result = method.invoke (instance);*/
-		PluginManager pluginManager = new PluginManager(Thread.currentThread().getContextClassLoader());
+		
+		
+		
+		//PluginManager pluginManager = new PluginManager(Thread.currentThread().getContextClassLoader());
 		
 		//Plugin test = new Plugin("plugins\\HelloWorld.jar",Thread.currentThread().getContextClassLoader(),pluginManager);
 
@@ -32,14 +38,48 @@ public class Principale {
 			//test.run();
 		//test2.run();
 
+		/*
+		 * Create the pluginManager
+		 */
+		PluginManager pluginManager = new PluginManager(ClassLoader.getSystemClassLoader());
 		
+		/*
+		 * Register it.
+		 */
+		PluginCommonMethods.registerPluginManager(pluginManager);
+		
+		/*
+		 * Load the "plugins" folder.
+		 */
 		File pluginFolder = new File("plugins");
+		System.out.println(pluginFolder.getAbsolutePath());
+		
 		pluginManager.preLoadPlugins(pluginFolder);
 		
-		PluginRunnable helloWorld = (PluginRunnable) pluginManager.getPlugin("Executor");
+		/*
+		 * See groups of plugins dependencies.
+		 */
+		int id = 0;
+    	for(ArrayList<PluginBase> pBL : pluginManager.groupedLoadedPlugins) {
+    		for(PluginBase pB : pBL) {
+        		System.out.println(pB.getName()+" ["+id+"]");
+        	}
+    		id++;
+    	}
+		
+    	/*
+    	 * Run plugins 
+    	 */
+
+		//Grouped example
+		PluginRunnableWrapper helloWorld2 = (PluginRunnableWrapper) pluginManager.getPlugin("Executor");
+    	
+    	//Function example
+    	PluginRunnableWrapper helloWorld = (PluginRunnableWrapper) pluginManager.getPlugin("PluginLister");
 
 		
 		helloWorld.run();
+		helloWorld2.run();
 	}
 
 }

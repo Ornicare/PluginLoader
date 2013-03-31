@@ -1,3 +1,10 @@
+
+RÃ©Ã©crire le grouper !!!!!
+
+!Chaque plugin est DEUX fois dans la liste !
+
+
+
 //ï»¿Une dÃ©pendance entre PluginBase et PluginManager, Ã  discuter
 //RÃ©cupÃ©ration du nom du jar : ... le dossier plugins n'est pas fixe....
 Les dÃ©pendances cycliques ! Pas encore vÃ©rifiÃ©es.
@@ -20,9 +27,18 @@ Demander un plugin par type.
 
 Ajout d'un attribut : launch to start.
 
-Ajouter un proxy lors d'une référence vers un objet d'un autre plugin.
+Ajouter un proxy lors d'une rï¿½fï¿½rence vers un objet d'un autre plugin.
 
-Dépendances : mettre tout le groupe dans le même classLoader => plus de findClass. (ou alors pour la gestion du lazy : arbre : classLoaderDeGroupe{ClassLoaders de plugins}
+Dï¿½pendances : mettre tout le groupe dans le mï¿½me classLoader => plus de findClass. (ou alors pour la gestion du lazy : arbre : classLoaderDeGroupe{ClassLoaders de plugins}
 
-On n'implémente plus IPluginRunnable : ou extend une classe qui l'implémente, et qui contient les méthodes donneMoiLesPluginsQuiImplémentent/ExtendTelTruc.
-Contentprovider implémente donneMoiUnObject => lazy là dessus. De base le getObject(nom_du_plugin) renvoie this. (récupère une instance de la classe principale)
+On n'implï¿½mente plus IPluginRunnable : ou extend une classe qui l'implï¿½mente, et qui contient les mï¿½thodes donneMoiLesPluginsQuiImplï¿½mentent/ExtendTelTruc.
+Contentprovider implï¿½mente donneMoiUnObject => lazy lï¿½ dessus. De base le getObject(nom_du_plugin) renvoie this. (rï¿½cupï¿½re une instance de la classe principale)
+
+
+/!\ Le nom du jar est utilisÃ© ! Utiliser le nom du plugin !
+
+Controler l'extension du fichier
+
+GetObject : args ?
+
+faire getPluginList => pb, comment connaitre le plugin manager ?

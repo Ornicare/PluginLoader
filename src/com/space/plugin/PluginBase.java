@@ -1,7 +1,7 @@
 package com.space.plugin;
 import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.Properties;
 
 
@@ -12,11 +12,11 @@ import java.util.Properties;
  * @author Ornicare
  *
  */
-public abstract class PluginBase {
+public abstract class PluginBase{
 
 	
 	private Properties config;
-	protected PluginClassLoader classLoader;
+	protected URLClassLoader classLoader;
 	private String pluginJarName;
 	private String name;
 	protected boolean initialized = false;
@@ -26,6 +26,14 @@ public abstract class PluginBase {
 	protected boolean lazy;
 	protected boolean singleton;
 	protected boolean isRunnable;
+	private int groupId;
+	
+	/**
+	 * The plugin instance
+	 */
+	protected Object instance;
+	
+	protected Class<?> classToLoad;
 	
 	/**
 	 * 
@@ -46,15 +54,7 @@ public abstract class PluginBase {
 	 *  Get a new classLoader for this plugin
 	 */
 	public void initialize() {
-		URL fileURL = null;
-		try {
-			fileURL = new URL("file:///"+System.getProperty("user.dir")+"/"+pluginJarName);
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		}
-		
-		URL[] tabURL = new URL[]{fileURL};
-		classLoader = pluginManager.getNewClassLoader(tabURL, getDependancies());
+		classLoader = pluginManager.getGroupClassLoader(groupId);
 		initialized = true;
 	}
 
@@ -112,7 +112,7 @@ public abstract class PluginBase {
      * @return
      * @throws Exception
      */
-    public final PluginClassLoader getClassLoader() throws Exception {
+    public final URLClassLoader getClassLoader() throws Exception {
     	if(!initialized) initialize();
         return classLoader;
     }
@@ -148,7 +148,41 @@ public abstract class PluginBase {
 	public Object getJarName() {
 		return pluginJarName.substring(8).substring(0, pluginJarName.length()-12);
 	}
-	
-	
+
+	public void setGrouId(int groupId) {
+		this.groupId = groupId;
+	}
+
+	public Object getInstance() {
+		return instance==null?createInstance():instance;
+	}
+
+	protected Object createInstance() {
+		
+		if(!initialized) initialize();
+		
+		if(lazy) this.initialized = true;
+		
+    	for(URL path : classLoader.getURLs()) {
+    		System.out.println(getName()+" "+path.getPath());
+    	}
+    	
+		
+
+		try {
+			classToLoad = classLoader.loadClass(mainClass);
+			Validate.notNull(classToLoad, "Invalid main class.");
+			
+			//TODO v�rifier condition
+			Validate.isTrue(IPluginRunnable.class.isAssignableFrom(classToLoad),"Main class doesn't implement IPluginRunnable");
+			
+			instance = classToLoad.newInstance();
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+		
+
+		return instance;
+	}
 
 }

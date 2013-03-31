@@ -7,5 +7,5 @@ package com.space.plugin;
  *
  */
 public interface IPluginContentProvider {
-
+	public Object getObject(Object... args);
 }
