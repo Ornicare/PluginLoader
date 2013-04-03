@@ -15,7 +15,7 @@ public abstract class PluginCommonMethods {
 	}
 	
 	protected Object getPlugin(String name) {
-		return pluginManager.getPlugin(name).getInstance();
+		return pluginManager.getPlugin(name).getProxy();
 	}
 	
 	protected ArrayList<String> getPluginList() {

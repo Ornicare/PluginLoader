@@ -1,8 +1,10 @@
 package com.space.plugin;
 import java.io.InputStream;
-import java.net.URL;
+import java.lang.reflect.Proxy;
 import java.net.URLClassLoader;
 import java.util.Properties;
+
+import com.space.proxy.InstanceHandler;
 
 
 /**
@@ -78,12 +80,13 @@ public abstract class PluginBase{
 	 */
 	private void loadConfig(Properties config) {
     	mainClass = config.getProperty("main");
-    	if(config.getProperty("runnable").equals("true")) Validate.notNull(mainClass, getName()+" : Invalid main class in the properties file");
     	
     	internalLazy = getPropertyBool("lazy");
     	singleton = getPropertyBool("singleton");
     	isRunnable = getPropertyBool("runnable");
     	runInFirst = getPropertyBool("launch");
+    	
+    	if(isRunnable) Validate.notNull(mainClass, getName()+" : Invalid main class in the properties file");
 		
 	}
 	
@@ -166,6 +169,18 @@ public abstract class PluginBase{
 	public void setGrouId(int groupId) {
 		this.groupId = groupId;
 	}
+	
+	public Object getProxy() {
+		InstanceHandler h = new InstanceHandler(this, internalLazy);
+		if(!initialized) initialize();
+
+		try {
+			return Proxy.newProxyInstance(classLoader, classLoader.loadClass(mainClass).getInterfaces(), h);
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 	public Object getInstance() {
 		return instance==null || !singleton ?createInstance():instance;
@@ -187,8 +202,6 @@ public abstract class PluginBase{
 			classToLoad = classLoader.loadClass(mainClass);
 			Validate.notNull(classToLoad, "Invalid main class.");
 			
-			//TODO v�rifier condition
-			Validate.isTrue(IPluginRunnable.class.isAssignableFrom(classToLoad),"Main class doesn't implement IPluginRunnable");
 			
 			instance = classToLoad.newInstance();
 		} catch (Throwable e) {

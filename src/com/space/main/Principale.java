@@ -23,7 +23,7 @@ public class Principale {
 		/*
 		 * Create the pluginManager
 		 */
-		PluginManager pluginManager = new PluginManager(ClassLoader.getSystemClassLoader());
+		PluginManager pluginManager = new PluginManager(Thread.currentThread().getContextClassLoader());
 		
 		/*
 		 * Register it.

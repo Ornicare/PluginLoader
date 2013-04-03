@@ -3,13 +3,16 @@ package com.space.proxy;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 
+import com.space.plugin.PluginBase;
+
 public class InstanceHandler implements InvocationHandler{
 
 	private Object realObject = null;
-	private Class<?> clazz;
+	private PluginBase pluginBase;
 
-	public InstanceHandler(Class<?> clazz, boolean lazy) {
-		this.clazz = clazz;
+	public InstanceHandler(PluginBase pluginBase, boolean lazy) {
+		super();
+		this.pluginBase = pluginBase;
 		if(!lazy) createNewInstance();
 	}
 	
@@ -21,9 +24,9 @@ public class InstanceHandler implements InvocationHandler{
 	}
 	
 	private void createNewInstance() {
-		System.out.println("Instanciation !");
+		//System.out.println("Instanciation !");
 		try {
-			this.realObject = this.clazz.newInstance();
+			this.realObject = pluginBase.getInstance();
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}

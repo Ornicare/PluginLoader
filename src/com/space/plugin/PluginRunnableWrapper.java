@@ -41,6 +41,10 @@ public class PluginRunnableWrapper extends PluginBase implements IPluginRunnable
 	protected void createRunMethod() throws Exception {
 		createInstance();
 		method = classToLoad.getDeclaredMethod("run");
+		
+		//TODO v�rifier condition
+		Validate.isTrue(IPluginRunnable.class.isAssignableFrom(classToLoad),"Main class doesn't implement IPluginRunnable");
+		
 		//System.out.println(method.getReturnType().getName());
 	}
 

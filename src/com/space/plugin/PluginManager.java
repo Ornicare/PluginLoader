@@ -265,7 +265,7 @@ public class PluginManager {
 		}
 		
 		try {
-			throw new Throwable("Plugin not found.");
+			throw new Throwable("Plugin not found : "+name);
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
