@@ -36,7 +36,6 @@ public class PluginManager {
 	/**
 	 * List of grouped plugins by dependencies.
 	 */
-	//TODO
 	public List<ArrayList<PluginBase>> groupedLoadedPlugins = new ArrayList<ArrayList<PluginBase>>();
 	
 	/**
@@ -63,7 +62,7 @@ public class PluginManager {
         
         // All plugins are in folder /plugins
         for (File file : directory.listFiles()) {
-        	if(file.isFile()) {
+        	if(file.isFile() && file.getName().endsWith(".jar")) {
         		Properties prop = loadConfig(file);
             	if(prop!=null) {
             		if(prop.containsKey("runnable") && prop.getProperty("runnable").equals("true")) {
@@ -102,13 +101,7 @@ public class PluginManager {
     	
     	int groupId = 0;
     	for(ArrayList<PluginBase> pBL : groupedLoadedPlugins) {
-    		//TODO truc mégalouche
-    		//String s ="zz"+pBL.toString();
-    		//System.out.println("zz"+pBL);
-    		
     		List<URL> plugins = new ArrayList<URL>();
-    		//@SuppressWarnings("unchecked")
-			//ArrayList<PluginBase> pBL2 = (ArrayList<PluginBase>) pBL.clone();
     		for(PluginBase pB : pBL) {
     			URL fileURL = null;
     			try {
@@ -227,6 +220,16 @@ public class PluginManager {
 	 * @param plugin
 	 */
 	public void register(PluginBase plugin) {
+		for(PluginBase pB : loadedPlugins) {
+			if(pB.getName().equals(plugin.getName())) {
+				try {
+					throw new Exception("Plugin "+pB.getName()+" present twice !");
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				return;
+			}
+		}
 		loadedPlugins.add(plugin);
 	}
 

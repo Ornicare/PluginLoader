@@ -12,8 +12,8 @@
 
 Validate : ne pas tout quitter, gÃ©rer les exceptions.
 
-CHARGER des bins (class) directement
-Exporter dans un dossier le .xml
+//NON : CHARGER des bins (class) directement
+//OSef : Exporter dans un dossier le .xml
 
 
 //A priori réglé dans la foulée.
@@ -22,13 +22,16 @@ Exporter dans un dossier le .xml
 
 //Commencer Ã  implÃ©menter le xml.
 
+Réecrire doc avec les interfaces.
+
+Donner classloader au lieu de les demander.
 JAVADOC
 
 Dependancies = dependencies.
 
-Load : vérifier si plusieurs fois le même nom.
+//Load : vérifier si plusieurs fois le même nom.
 
-Demander un plugin par type.
+//Demander un plugin par type.
 
 Le pb du dossier linux/windows (plugins)
 
@@ -36,16 +39,20 @@ Le pb du dossier linux/windows (plugins)
 
 Ajouter un proxy lors d'une rï¿½fï¿½rence vers un objet d'un autre plugin.
 
-Dï¿½pendances : mettre tout le groupe dans le mï¿½me classLoader => plus de findClass. (ou alors pour la gestion du lazy : arbre : classLoaderDeGroupe{ClassLoaders de plugins}
+//Dï¿½pendances : mettre tout le groupe dans le mï¿½me classLoader => plus de findClass. (ou alors pour la gestion du lazy : arbre : classLoaderDeGroupe{ClassLoaders de plugins}
 
-On n'implï¿½mente plus IPluginRunnable : ou extend une classe qui l'implï¿½mente, et qui contient les mï¿½thodes donneMoiLesPluginsQuiImplï¿½mentent/ExtendTelTruc.
-Contentprovider implï¿½mente donneMoiUnObject => lazy lï¿½ dessus. De base le getObject(nom_du_plugin) renvoie this. (rï¿½cupï¿½re une instance de la classe principale)
+//On n'implï¿½mente plus IPluginRunnable : ou extend une classe qui l'implï¿½mente, et qui contient les mï¿½thodes donneMoiLesPluginsQuiImplï¿½mentent/ExtendTelTruc.
+//Contentprovider implï¿½mente donneMoiUnObject => lazy lï¿½ dessus. De base le getObject(nom_du_plugin) renvoie this. (rï¿½cupï¿½re une instance de la classe principale)
 
 
-Classes statiques ?
+//osef  : doc : non : Classes statiques ?
 
-Controler l'extension du fichier
+//Controler l'extension du fichier
 
-GetObject : args ?
+//GetObject : args ?
 
 //faire getPluginList => pb, comment connaitre le plugin manager ?
+
+
+Classe principale  : doit avoir un constructeur par défaut ! !!!! !! !
+===> si vous voulez d'autres constructeurs, utiliser des set !!!

@@ -5,11 +5,23 @@ import java.lang.reflect.Method;
 
 import com.space.plugin.PluginBase;
 
+/**
+ * 
+ * Handler for the lazy proxy.
+ * @author Ornicare
+ *
+ */
 public class InstanceHandler implements InvocationHandler{
-
+	
 	private Object realObject = null;
 	private PluginBase pluginBase;
-
+	
+	/**
+	 * Create a new handler.
+	 * 
+	 * @param pluginBase plugin to proxyfie
+	 * @param lazy is it lazy ?
+	 */
 	public InstanceHandler(PluginBase pluginBase, boolean lazy) {
 		super();
 		this.pluginBase = pluginBase;
@@ -23,6 +35,9 @@ public class InstanceHandler implements InvocationHandler{
 		return m.invoke(realObject, args);
 	}
 	
+	/**
+	 * Give an instance of the plugin.
+	 */
 	private void createNewInstance() {
 		//System.out.println("Instanciation !");
 		try {

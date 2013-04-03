@@ -37,6 +37,7 @@ public abstract class PluginBase{
 	protected Object instance;
 	
 	protected Class<?> classToLoad;
+	protected Class<?> mainClassInstance;
 	
 	/**
 	 * 
@@ -172,18 +173,24 @@ public abstract class PluginBase{
 	
 	public Object getProxy() {
 		InstanceHandler h = new InstanceHandler(this, internalLazy);
+		
+		//Get the classloader if not exists.
 		if(!initialized) initialize();
-
-		try {
-			return Proxy.newProxyInstance(classLoader, classLoader.loadClass(mainClass).getInterfaces(), h);
-		} catch (Throwable e) {
-			e.printStackTrace();
-		}
-		return null;
+		return Proxy.newProxyInstance(classLoader, getMainClass().getInterfaces(), h);
 	}
 
 	public Object getInstance() {
 		return instance==null || !singleton ?createInstance():instance;
+	}
+	
+	public Class<?> getMainClass() {
+		if(!initialized) initialize();
+		try {
+			mainClassInstance = classLoader.loadClass(mainClass);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return mainClassInstance;
 	}
 
 	protected Object createInstance() {

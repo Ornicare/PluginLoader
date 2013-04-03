@@ -1,12 +1,24 @@
 package com.space.plugin;
 
 import java.util.ArrayList;
+import java.util.List;
 
+/**
+ * 
+ * Commons methods for all plugins
+ * @author Ornicare
+ *
+ */
 public abstract class PluginCommonMethods {
 	
 	private static boolean stopRegistration = false;
 	private static PluginManager pluginManager;
 	
+	/**
+	 * Used to register the plugin manager. Dont' touch it !
+	 * 
+	 * @param pluginManager
+	 */
 	public static final void registerPluginManager(PluginManager pluginManager) {
 		if(!stopRegistration) {
 			PluginCommonMethods.pluginManager = pluginManager;
@@ -14,10 +26,37 @@ public abstract class PluginCommonMethods {
 		}
 	}
 	
+	/**
+	 * Return a proxy of an instance of the main class of the plugin <code>name</code> if found, null otherwise.
+	 * 
+	 * @param name plugin's name.
+	 * @return
+	 */
 	protected Object getPlugin(String name) {
-		return pluginManager.getPlugin(name).getProxy();
+		PluginBase plugin = pluginManager.getPlugin(name);
+		return plugin==null?null:plugin.getProxy();
 	}
 	
+	/**
+	 * Return plugins that are assignables from <code>clazz</code>.
+	 * 
+	 * @param clazz
+	 * @return
+	 */
+	protected List<String> getPluginImplementationsOf(Class<?> clazz) {
+		List<String> retour = new ArrayList<String>();
+		for(String plugin : pluginManager.getPluginList()) {
+			PluginBase pB = pluginManager.getPlugin(plugin);
+			if(pB!=null && clazz.isAssignableFrom(pB.getMainClass())) retour.add(plugin);
+		}
+		return retour;
+	}
+	
+	/**
+	 * Return plugin's names list.
+	 * 
+	 * @return
+	 */
 	protected ArrayList<String> getPluginList() {
 		return pluginManager.getPluginList();
 	}
