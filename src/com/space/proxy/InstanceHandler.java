@@ -15,6 +15,8 @@ public class InstanceHandler implements InvocationHandler{
 	
 	private Object realObject = null;
 	private PluginBase pluginBase;
+	private Object[] args;
+	private Class<?>[] argsType;
 	
 	/**
 	 * Create a new handler.
@@ -28,20 +30,34 @@ public class InstanceHandler implements InvocationHandler{
 		if(!lazy) createNewInstance();
 	}
 	
+	public InstanceHandler(PluginBase pluginBase, boolean lazy,
+			Object[] args, Class<?>[] argsType) {
+		super();
+		this.pluginBase = pluginBase;
+		this.args = args;
+		this.argsType = argsType;
+		if(!lazy) createNewInstance();
+	}
+
 	@Override
 	public Object invoke(Object pseudoObject, Method m, Object[] args)
 			throws Throwable {
 		if(realObject == null) createNewInstance();
 		return m.invoke(realObject, args);
 	}
-	
+
 	/**
 	 * Give an instance of the plugin.
 	 */
 	private void createNewInstance() {
 		//System.out.println("Instanciation !");
 		try {
-			this.realObject = pluginBase.getInstance();
+			if(args==null) {
+				this.realObject = pluginBase.getInstance();
+			}
+			else {
+				this.realObject = pluginBase.getInstance(args, argsType);
+			}
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}

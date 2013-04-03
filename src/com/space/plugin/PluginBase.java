@@ -1,5 +1,6 @@
 package com.space.plugin;
 import java.io.InputStream;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Proxy;
 import java.net.URLClassLoader;
 import java.util.Properties;
@@ -183,6 +184,43 @@ public abstract class PluginBase{
 		return instance==null || !singleton ?createInstance():instance;
 	}
 	
+	/**
+	 * Create a new instance using args
+	 * 
+	 * @param args
+	 * @param argsType 
+	 * @return
+	 */
+	public Object getInstance(Object[] args, Class<?>[] argsType) {
+		if(!initialized) initialize();
+		
+		Object localInstance = null;
+		
+		//If not existing, try to create the args model.
+		if(argsType==null) {
+			argsType = new Class<?>[args.length];
+			
+			//Creating args model
+			for(int i =0;i<args.length;i++) {
+				argsType[i] = args[i].getClass();
+			}	
+		}
+		
+
+		try {
+			classToLoad = classLoader.loadClass(mainClass);
+			Validate.notNull(classToLoad, "Invalid main class.");
+			
+			Constructor<?> constructor = classToLoad.getConstructor(argsType);
+			localInstance = constructor.newInstance(args);
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+		
+
+		return localInstance;
+	}
+	
 	public Class<?> getMainClass() {
 		if(!initialized) initialize();
 		try {
@@ -218,5 +256,15 @@ public abstract class PluginBase{
 
 		return instance;
 	}
+
+	public Object getProxy(Object[] args, Class<?>[] argsType) {
+		InstanceHandler h = new InstanceHandler(this, internalLazy, args, argsType);
+		
+		//Get the classloader if not exists.
+		if(!initialized) initialize();
+		return Proxy.newProxyInstance(classLoader, getMainClass().getInterfaces(), h);
+	}
+
+
 
 }

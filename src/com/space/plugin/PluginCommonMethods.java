@@ -60,4 +60,28 @@ public abstract class PluginCommonMethods {
 	protected ArrayList<String> getPluginList() {
 		return pluginManager.getPluginList();
 	}
+	
+	/**
+	 * Return a proxy of an instance of the main class using constructor based on args model of the plugin <code>name</code> if found, null otherwise.
+	 * Attention : incompatible with singleton attribut ! (always create a new object)
+	 * 
+	 * @param name plugin's name.
+	 * @return
+	 */
+	protected Object getPlugin(String name, Object... args) {
+		PluginBase plugin = pluginManager.getPlugin(name);
+		return plugin==null?null:plugin.getProxy(args, null);
+	}
+	
+	/**
+	 * Return a proxy of an instance of the main class using constructor based on argType model of the plugin <code>name</code> if found, null otherwise.
+	 * Attention : incompatible with singleton attribut ! (always create a new object)
+	 * 
+	 * @param name plugin's name.
+	 * @return
+	 */
+	protected Object getPluginUsingConstructor(String name, Class<?>[] argsType, Object... args) {
+		PluginBase plugin = pluginManager.getPlugin(name);
+		return plugin==null?null:plugin.getProxy(args, argsType);
+	}
 }

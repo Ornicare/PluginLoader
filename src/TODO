@@ -37,7 +37,7 @@ Le pb du dossier linux/windows (plugins)
 
 //Ajout d'un attribut : launch to start.
 
-Ajouter un proxy lors d'une rï¿½fï¿½rence vers un objet d'un autre plugin.
+//Ajouter un proxy lors d'une rï¿½fï¿½rence vers un objet d'un autre plugin.
 
 //Dï¿½pendances : mettre tout le groupe dans le mï¿½me classLoader => plus de findClass. (ou alors pour la gestion du lazy : arbre : classLoaderDeGroupe{ClassLoaders de plugins}
 
@@ -56,3 +56,8 @@ Ajouter un proxy lors d'une rï¿½fï¿½rence vers un objet d'un autre plugin.
 
 Classe principale  : doit avoir un constructeur par défaut ! !!!! !! !
 ===> si vous voulez d'autres constructeurs, utiliser des set !!!
+
+
+
+Attention DOC : pour getPlugin(name,args), le constructeur ne doit pas contenir de type primitifs.
+Si => utiliser getPluginUsingConstructor.
