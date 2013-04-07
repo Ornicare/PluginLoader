@@ -33,6 +33,40 @@
 %%%Personal packages
 \usepackage{moreverb}
 \usepackage{latexsym}
+\usepackage{framed}
+
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{caption}
+\DeclareCaptionFont{white}{\color{white}}
+\DeclareCaptionFormat{listing}{%
+  \parbox{\textwidth}{\colorbox{gray}{\parbox{\textwidth}{#1#2#3}}\vskip-4pt}}
+\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white}
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+\lstset{frame=lrb,xleftmargin=\fboxsep,xrightmargin=-\fboxsep}
+
+\lstset{ %
+language=Java,                % choose the language of the code
+basicstyle=\footnotesize,       % the size of the fonts that are used for the code
+backgroundcolor=\color{white},  % choose the background color. You must add \usepackage{color}
+showspaces=false,               % show spaces adding particular underscores
+showstringspaces=false,         % underline spaces within strings
+showtabs=false,                 % show tabs within strings adding particular underscores
+frame=single,           % adds a frame around the code
+tabsize=4,          % sets default tabsize to 2 spaces
+captionpos=t,           % sets the caption-position to bottom
+breaklines=true,        % sets automatic line breaking
+breakatwhitespace=false,    % sets if automatic breaks should only happen at whitespace
+keywordstyle=\color{blue},
+stringstyle=\color{mymauve}, 
+rulecolor=\color{black},
+extendedchars=true,  belowcaptionskip=3ex,
+escapeinside={\%*}{*)}          % if you want to add a comment within your code
+}
+
+
 
 % These packages are all incorporated in the memoir class to one degree or another...
 
@@ -71,6 +105,13 @@
 \begin{document}
 \maketitle
 
+\chapter*{Introduction} 
+
+Here is the brief tutorial about how to make your own plugin for our plateform.
+//TODO make a real introduction.
+
+ Note : All codes listings are given in theirs files forms.
+
 \chapter{Create your first plugin}
 
 The first thing you need is a new project. Name it at your conveniance.  For the example, we name it ``HelloWorld''.
@@ -86,17 +127,29 @@ Secondly add ``PluginLoader.jar'' to the Java Build Path (right clic on th proje
 
 \section{Saying ``Hello World''}
 
-Before creating a new class, you must create a new package. In this example we take ``com.ornicare.helloworld''. Then create a new class and make it an extend of PluginRunnable and create a run method : it's the hook for the platform. It must look like this : \begin{verbatimtab}package com.ornicare.helloworld;
+Before creating a new class, you must create a new package. In this example we take ``com.ornicare.helloworld''. Then create a new class and make it an extend of PluginRunnable and create a run method : it's the hook for the platform. It must look like this : 
+\begin{lstlisting}[label=HelloWorld.java,caption=MainClass.java]
+package com.ornicare.helloworld;
 
 import com.space.plugin.PluginRunnable;
 
+
 public class MainClass extends PluginRunnable {
-	
+    
 	@Override
 	public void run() {
 		System.out.println("Hello world !");
 	}
-}\end{verbatimtab}
+
+\end{lstlisting}
+
+\section{Interface your classe}
+
+In order to use your plugin in another plugin, you must interface it. In this example, it's very simple, create a new interface ``IMainClass" like this : \begin{lstlisting}[label=IHelloWorld.java,caption=IMainClass.java]package com.ornicare.helloworld;
+
+public interface IMainClass {
+}\end{lstlisting}
+Note : it's necessary when you need to cast another plugin object (beacause it is proxies, you need to use interfaces).
 
 \section{Generate the propertie file}
 
@@ -105,17 +158,28 @@ Create a new file named ``plugin.properties'' into the project. In this file add
 	\item The plugin name : ``name = HelloWorld"
 	\item The hook's class path : ``main = com.ornicare.helloworld.MainClass"
 	\item The runnable attribut : ``runnable = true"
+	\item The launchable attribut : ``launch = true"
 \end{itemize}
+
+It gave something like this : 
+\begin{lstlisting}[label=plugin.properties,caption=plugin.properties]
+name = HelloWorld
+main = com.ornicare.helloworld.MainClass
+runnable = true
+launch = true
+\end{lstlisting}
 
 \section{Exporting your first plugin}
 
-To run this, you need to create a jar of your plugin : ``File \textgreater{} Export \textgreater{} Java/JAR File". Put the created jar into the plugin directory and run the plugin loader.
+To run this, you need to create a jar of your plugin : ``File \textgreater{} Export \textgreater{} Java/JAR File". Put the created jar into the plugin directory and run the plugin loader with ``java -jar PluginLoader.jar".
+
+See the how to launch the plugin loader in another document.
 
 \chapter{Intricated plugins}
 
-\section{Using another plugin}
+\section{Using another plugin classes}
 
-For this example, we are going to use the ``CConsole'' plugin :  it's just a plugin to display the java console (and few other things). So put ``CConsole.jar" into the plugin directory. Add it to your project Java Build Path. And use it. For example : \begin{verbatimtab}package com.ornicare.helloworld;
+For this example, we are going to use the ``CConsole'' plugin :  it's just a plugin to display the java console (and few other things). So put ``CConsole.jar" into the plugin directory. Add it to your project Java Build Path. And use it. For example : \begin{lstlisting}[label=HelloWorld.java2,caption=HelloWorld.java]package com.ornicare.helloworld;
 
 import cconsole.CConsole;
 
@@ -128,8 +192,60 @@ public class MainClass extends PluginRunnable {
 		CConsole.load();
 		CConsole.println("Hello world !");
 	}
-}\end{verbatimtab}
+}\end{lstlisting}
 Then you need to add the following line to your properties file : ``depend = CConsole".
+
+\section{Using another plugin objects}
+
+\subsection{Create a content provider}
+Basically, it's just a plugin not conceive to be runnable. In our example, we are going to use a class which provide some functions on an int[].
+
+\clearpage
+\subsubsection{Plugin TableHelper}
+\lstinputlisting[label=TableHelper.java,caption=TableHelper.java]{sourceFiles/PluginTableHelper/src/com/ornicare/tablehelper/TableHelper.java}
+
+See how this class is build : it extends PluginContentProvider and implements its own interface. It's necessary to retrieve an object.
+
+\lstinputlisting[label=ITableHelper.java,caption=ITableHelper.java]{sourceFiles/PluginTableHelper/src/com/ornicare/tablehelper/ITableHelper.java}
+
+\lstinputlisting[label=ITableHelper.java,caption=ITableHelper.java]{sourceFiles/PluginTableHelper/src/plugin.properties}
+
+For a content provider, main class mean instanciable class.
+
+\subsection{Plugin TableUser}
+
+For the java build path, make like in the first example.
+
+\lstinputlisting[label=MainClass.java,caption=MainClass.java]{sourceFiles/PluginTableUser/src/com/ornicare/tableuser/MainClass.java}
+
+\lstinputlisting[label=IMainClass.java,caption=IMainClass.java]{sourceFiles/PluginTableUser/src/com/ornicare/tableuser/IMainClass.java}
+
+\lstinputlisting[label=ITableHelper.java,caption=ITableHelper.java]{sourceFiles/PluginTableUser/src/plugin.properties}
+
+You could note the use of the getPlugin function.
+
+\subsection{Execution}
+
+With only this two plusgins, you may obtain the following result : 
+
+\begin{lstlisting}[label=HelloWorld.java,caption=HelloWorld.java]
+F:\GitHub\Lib>java -jar PluginLoader.jar
+Plugins folder in use : F:\GitHub\Lib\plugins
+
+Dependencies groups (linked plugins) :
+Group 0 :
+    TableHelper [jar_name = TableHelper]
+    TableUser [jar_name = TableUser]
+
+Running : TableUser
+Sum : 10
+Min : 1
+Max : 4
+Average : 2
+SquareType : 1.0
+
+F:\GitHub\Lib>
+\end{lstlisting}
 
 \chapter{Make a regular ``plugin.properties"}
 
@@ -143,19 +259,5 @@ You are allowed to use the following attributes :
 	\item Indicate dependencies to others plugins : ``depend = plugin1, plugin2, ..."
 	\item Launch automatically : ``launch = true$\backslash$false". The plugin need to be runnable.
 \end{itemize}
-
-\chapter{Advanced functions}
-
-\section{Advanced functions for all plugins}
-
-\subsection{getPlugin}
-\subsection{getPluginList}
-
-\section{Advanced functions for a runnable plugin}
-
-\section{Advanced functions for a content provide plugin}
-
-\subsection{getObject}
-
 
 \end{document}
