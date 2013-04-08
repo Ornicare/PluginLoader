@@ -1,4 +1,3 @@
-
 //Réécrire le grouper !!!!!
 
 //!Chaque plugin est DEUX fois dans la liste !
@@ -7,7 +6,7 @@
 
 //﻿Une dépendance entre PluginBase et PluginManager, à discuter
 //Récupération du nom du jar : ... le dossier plugins n'est pas fixe....
-//Les dépendances cycliques ! Pas encore vérifiées.  => osef : impossible � faire involontairement
+//Les dépendances cycliques ! Pas encore vérifiées.  => osef : impossible � faire involontairement
 //Lazy et co : à revoir, pas grand sens pour le runnable par exemple. En fait si.
 
 Validate : ne pas tout quitter, gérer les exceptions.
@@ -16,20 +15,20 @@ Validate : ne pas tout quitter, gérer les exceptions.
 //OSef : Exporter dans un dossier le .xml
 
 
-//A priori r�gl� dans la foul�e.
+//A priori r�gl� dans la foul�e.
 ///!\ Le nom du jar est utilisé ! Utiliser le nom du plugin !
 //TOUJOURS utiliser le NOM du PLUGIN (et pas celui du jar...)
 
 //Commencer à implémenter le xml.
 
-R�ecrire doc avec les interfaces.
+R�ecrire doc avec les interfaces.
 
 Donner classloader au lieu de les demander.
 JAVADOC
 
 Dependancies = dependencies.
 
-//Load : v�rifier si plusieurs fois le m�me nom.
+//Load : v�rifier si plusieurs fois le m�me nom.
 
 //Demander un plugin par type.
 
@@ -54,10 +53,36 @@ Le pb du dossier linux/windows (plugins)
 //faire getPluginList => pb, comment connaitre le plugin manager ?
 
 
-Classe principale  : doit avoir un constructeur par d�faut ! !!!! !! !
+Classe principale  : doit avoir un constructeur par d�faut ! !!!! !! !
 ===> si vous voulez d'autres constructeurs, utiliser des set !!!
 
 
 
 Attention DOC : pour getPlugin(name,args), le constructeur ne doit pas contenir de type primitifs.
 Si => utiliser getPluginUsingConstructor.
+
+
+A LIRE
+Quand j'exécute l'application chez moi, ça me donne ça (j'ai Java 1.6), les plugins ont été compilés avec cette même version ? :
+Running : AfficheurCaller
+java.lang.UnsupportedClassVersionError: com/ornicare/afficheurcaller/MainClass : Unsupported major.minor version 51.0
+  at java.lang.ClassLoader.defineClass1(Native Method)
+	at java.lang.ClassLoader.defineClass(ClassLoader.java:634)
+	at java.security.SecureClassLoader.defineClass(SecureClassLoader.java:142)
+	at java.net.URLClassLoader.defineClass(URLClassLoader.java:277)
+	at java.net.URLClassLoader.access$000(URLClassLoader.java:73)
+	at java.net.URLClassLoader$1.run(URLClassLoader.java:212)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.net.URLClassLoader.findClass(URLClassLoader.java:205)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:321)
+	at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:294)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:314)
+	at java.lang.ClassLoader.loadClass(ClassLoader.java:266)
+	at com.space.plugin.PluginBase.createInstance(PluginBase.java:247)
+	at com.space.plugin.PluginRunnableWrapper.createRunMethod(PluginRunnableWrapper.java:42)
+	at com.space.plugin.PluginRunnableWrapper.run(PluginRunnableWrapper.java:24)
+	at com.space.main.Principale.main(Principale.java:63)
+Exception in thread "main" java.lang.NullPointerException
+	at com.space.plugin.PluginRunnableWrapper.createRunMethod(PluginRunnableWrapper.java:43)
+	at com.space.plugin.PluginRunnableWrapper.run(PluginRunnableWrapper.java:24)
+	at com.space.main.Principale.main(Principale.java:63)
