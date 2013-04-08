@@ -98,8 +98,8 @@ escapeinside={\%*}{*)}          % if you want to add a comment within your code
 %%% The "real" document content comes below...
 
 \title{Developer documentation}
-\author{\textsc{Wollenburger} Antoine}
-%\date{} % Activate to display a given date or no date (if empty),
+\author{\textsc{Wollenburger} Antoine, \textsc{Chénais} Sébastien, \textsc{Ménoret} Clément, \textsc{Barillère} Céline}
+\date{} % Activate to display a given date or no date (if empty),
          % otherwise the current date is printed 
 
 \begin{document}
@@ -210,11 +210,11 @@ See how this class is build : it extends PluginContentProvider and implements it
 
 \lstinputlisting[label=ITableHelper.java,caption=ITableHelper.java]{sourceFiles/PluginTableHelper/src/plugin.properties}
 
-For a content provider, main class mean instanciable class.
+For a content provider, main class mean instanciable class. Export at jar.
 
 \subsection{Plugin TableUser}
 
-For the java build path, make like in the first example.
+For the java build path, make like in the first example, and add the jar of TableHelper.
 
 \lstinputlisting[label=MainClass.java,caption=MainClass.java]{sourceFiles/PluginTableUser/src/com/ornicare/tableuser/MainClass.java}
 

@@ -1,9 +1,7 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2013.4.3)  8 APR 2013 16:30
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2013.4.3)  8 APR 2013 16:37
 entering extended mode
-**PluginLoaderDevDoc.tex
-
-(C:\Users\Antoine\Documents\GitHub\PluginLoader\Doc\PluginLoaderDevDoc\PluginLo
-aderDevDoc.tex
+**instructions.tex
+("C:\Users\Antoine\Documents\Rapport de prog\instructions.tex"
 LaTeX2e <2011/06/27>
 Babel <v3.8m> and hyphenation patterns for english, afrikaans, ancientgreek, ar
 abic, armenian, assamese, basque, bengali, bokmal, bulgarian, catalan, coptic, 
@@ -33,10 +31,45 @@ File: size11.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
 \belowcaptionskip=\skip42
 \bibindent=\dimen102
 )
+("C:\Program Files\MiKTeX 2.9\tex\generic\babel\babel.sty"
+Package: babel 2008/07/08 v3.8m The Babel package
+
+*************************************
+* Local config file bblopts.cfg used
+*
+("C:\Program Files\MiKTeX 2.9\tex\latex\00miktex\bblopts.cfg"
+File: bblopts.cfg 2006/07/31 v1.0 MiKTeX 'babel' configuration
+)
+("C:\Program Files\MiKTeX 2.9\tex\generic\babel\frenchb.ldf"
+Language: frenchb 2009/03/16 v2.3d French support from the babel system
+
+("C:\Program Files\MiKTeX 2.9\tex\generic\babel\babel.def"
+File: babel.def 2008/07/08 v3.8m Babel common definitions
+\babel@savecnt=\count88
+\U@D=\dimen103
+)
+Package babel Info: Making : an active character on input line 120.
+Package babel Info: Making ; an active character on input line 121.
+Package babel Info: Making ! an active character on input line 122.
+Package babel Info: Making ? an active character on input line 123.
+\FB@Mht=\dimen104
+\std@mcc=\count89
+\dec@mcc=\count90
+\parindentFFN=\dimen105
+
+*************************************
+* Local config file frenchb.cfg used
+*
+("C:\Program Files\MiKTeX 2.9\tex\generic\babel\frenchb.cfg")))
+("C:\Program Files\MiKTeX 2.9\tex\latex\carlisle\scalefnt.sty")
+("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\keyval.sty"
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks14
+)
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\inputenc.sty"
 Package: inputenc 2008/03/30 v1.1d Input encoding file
-\inpenc@prehook=\toks14
-\inpenc@posthook=\toks15
+\inpenc@prehook=\toks15
+\inpenc@posthook=\toks16
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\utf8.def"
 File: utf8.def 2008/04/05 v1.1m UTF-8 support for inputenc
@@ -250,13 +283,51 @@ Now handling font encoding U ...
    defining Unicode char U+2122 (decimal 8482)
    defining Unicode char U+2423 (decimal 9251)
 ))
+("C:\Program Files\MiKTeX 2.9\tex\latex\base\fontenc.sty"
+Package: fontenc 2005/09/27 v1.99g Standard LaTeX package
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\base\t1enc.def"
+File: t1enc.def 2005/09/27 v1.99g Standard LaTeX file
+LaTeX Font Info:    Redeclaring font encoding T1 on input line 43.
+))
+("C:\Program Files\MiKTeX 2.9\tex\latex\lm\lmodern.sty"
+Package: lmodern 2009/10/30 v1.6 Latin Modern Fonts
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  OT1/cmr/m/n --> OT1/lmr/m/n on input line 22.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `normal'
+(Font)                  OML/cmm/m/it --> OML/lmm/m/it on input line 23.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
+(Font)                  OMS/cmsy/m/n --> OMS/lmsy/m/n on input line 24.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
+(Font)                  OMX/cmex/m/n --> OMX/lmex/m/n on input line 25.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 26.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `bold'
+(Font)                  OML/cmm/b/it --> OML/lmm/b/it on input line 27.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
+(Font)                  OMS/cmsy/b/n --> OMS/lmsy/b/n on input line 28.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
+(Font)                  OMX/cmex/m/n --> OMX/lmex/m/n on input line 29.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
+(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 31.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
+(Font)                  OT1/cmss/m/n --> OT1/lmss/m/n on input line 32.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
+(Font)                  OT1/cmr/m/it --> OT1/lmr/m/it on input line 33.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
+(Font)                  OT1/cmtt/m/n --> OT1/lmtt/m/n on input line 34.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 35.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
+(Font)                  OT1/cmss/bx/n --> OT1/lmss/bx/n on input line 36.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
+(Font)                  OT1/cmr/bx/it --> OT1/lmr/bx/it on input line 37.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
+(Font)                  OT1/cmtt/m/n --> OT1/lmtt/m/n on input line 38.
+)
 ("C:\Program Files\MiKTeX 2.9\tex\latex\geometry\geometry.sty"
 Package: geometry 2010/09/12 v5.6 Page Geometry
 
-("C:\Program Files\MiKTeX 2.9\tex\latex\graphics\keyval.sty"
-Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
-\KV@toks@=\toks16
-)
 ("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\ifpdf.sty"
 Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
 Package ifpdf Info: pdfTeX in PDF mode is detected.
@@ -268,17 +339,17 @@ Package ifvtex Info: VTeX not detected.
 ("C:\Program Files\MiKTeX 2.9\tex\generic\ifxetex\ifxetex.sty"
 Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 )
-\Gm@cnth=\count88
-\Gm@cntv=\count89
-\c@Gm@tempcnt=\count90
-\Gm@bindingoffset=\dimen103
-\Gm@wd@mp=\dimen104
-\Gm@odd@mp=\dimen105
-\Gm@even@mp=\dimen106
-\Gm@layoutwidth=\dimen107
-\Gm@layoutheight=\dimen108
-\Gm@layouthoffset=\dimen109
-\Gm@layoutvoffset=\dimen110
+\Gm@cnth=\count91
+\Gm@cntv=\count92
+\c@Gm@tempcnt=\count93
+\Gm@bindingoffset=\dimen106
+\Gm@wd@mp=\dimen107
+\Gm@odd@mp=\dimen108
+\Gm@even@mp=\dimen109
+\Gm@layoutwidth=\dimen110
+\Gm@layoutheight=\dimen111
+\Gm@layouthoffset=\dimen112
+\Gm@layoutvoffset=\dimen113
 \Gm@dimlist=\toks17
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\geometry\geometry.cfg"))
@@ -305,35 +376,35 @@ Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
 ("C:\Program Files\MiKTeX 2.9\tex\generic\oberdiek\ltxcmds.sty"
 Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
 )
-\Gread@gobject=\count91
+\Gread@gobject=\count94
 ))
-\Gin@req@height=\dimen111
-\Gin@req@width=\dimen112
+\Gin@req@height=\dimen114
+\Gin@req@width=\dimen115
 )
 ("C:\Program Files\MiKTeX 2.9\tex\latex\booktabs\booktabs.sty"
 Package: booktabs 2005/04/14 v1.61803 publication quality tables
-\heavyrulewidth=\dimen113
-\lightrulewidth=\dimen114
-\cmidrulewidth=\dimen115
-\belowrulesep=\dimen116
-\belowbottomsep=\dimen117
-\aboverulesep=\dimen118
-\abovetopsep=\dimen119
-\cmidrulesep=\dimen120
-\cmidrulekern=\dimen121
-\defaultaddspace=\dimen122
-\@cmidla=\count92
-\@cmidlb=\count93
-\@aboverulesep=\dimen123
-\@belowrulesep=\dimen124
-\@thisruleclass=\count94
-\@lastruleclass=\count95
-\@thisrulewidth=\dimen125
+\heavyrulewidth=\dimen116
+\lightrulewidth=\dimen117
+\cmidrulewidth=\dimen118
+\belowrulesep=\dimen119
+\belowbottomsep=\dimen120
+\aboverulesep=\dimen121
+\abovetopsep=\dimen122
+\cmidrulesep=\dimen123
+\cmidrulekern=\dimen124
+\defaultaddspace=\dimen125
+\@cmidla=\count95
+\@cmidlb=\count96
+\@aboverulesep=\dimen126
+\@belowrulesep=\dimen127
+\@thisruleclass=\count97
+\@lastruleclass=\count98
+\@thisrulewidth=\dimen128
 )
 ("C:\Program Files\MiKTeX 2.9\tex\latex\tools\array.sty"
 Package: array 2008/09/09 v2.4c Tabular extension package (FMi)
-\col@sep=\dimen126
-\extrarowheight=\dimen127
+\col@sep=\dimen129
+\extrarowheight=\dimen130
 \NC@list=\toks18
 \extratabsurround=\skip43
 \backup@length=\skip44
@@ -360,35 +431,35 @@ Package: caption 2013/02/03 v3.3-65 Customizing captions (AR)
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\caption\caption3.sty"
 Package: caption3 2013/02/03 v1.5-62 caption3 kernel (AR)
-\captionmargin=\dimen128
-\captionmargin@=\dimen129
-\captionwidth=\dimen130
-\caption@tempdima=\dimen131
-\caption@indent=\dimen132
-\caption@parindent=\dimen133
-\caption@hangindent=\dimen134
+\captionmargin=\dimen131
+\captionmargin@=\dimen132
+\captionwidth=\dimen133
+\caption@tempdima=\dimen134
+\caption@indent=\dimen135
+\caption@parindent=\dimen136
+\caption@hangindent=\dimen137
 )
-\c@ContinuedFloat=\count96
+\c@ContinuedFloat=\count99
 )
-\c@KVtest=\count97
+\c@KVtest=\count100
 \sf@farskip=\skip49
-\sf@captopadj=\dimen135
+\sf@captopadj=\dimen138
 \sf@capskip=\skip50
 \sf@nearskip=\skip51
-\c@subfigure=\count98
-\c@subfigure@save=\count99
-\c@lofdepth=\count100
-\c@subtable=\count101
-\c@subtable@save=\count102
-\c@lotdepth=\count103
+\c@subfigure=\count101
+\c@subfigure@save=\count102
+\c@lofdepth=\count103
+\c@subtable=\count104
+\c@subtable@save=\count105
+\c@lotdepth=\count106
 \sf@top=\skip52
 \sf@bottom=\skip53
 )
 ("C:\Program Files\MiKTeX 2.9\tex\latex\moreverb\moreverb.sty"
 Package: moreverb 2008/06/03 v2.3a `more' verbatim facilities
-\tab@position=\count104
-\tab@size=\count105
-\listing@line=\count106
+\tab@position=\count107
+\tab@size=\count108
+\listing@line=\count109
 )
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\latexsym.sty"
 Package: latexsym 1998/08/17 v2.2e Standard LaTeX package (lasy symbols)
@@ -399,10 +470,10 @@ LaTeX Font Info:    Overwriting symbol font `lasy' in version `bold'
 ("C:\Program Files\MiKTeX 2.9\tex\latex\framed\framed.sty"
 Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
 \OuterFrameSep=\skip54
-\fb@frw=\dimen136
-\fb@frh=\dimen137
-\FrameRule=\dimen138
-\FrameSep=\dimen139
+\fb@frw=\dimen139
+\fb@frh=\dimen140
+\FrameRule=\dimen141
+\FrameSep=\dimen142
 )
 ("C:\Program Files\MiKTeX 2.9\tex\latex\xcolor\xcolor.sty"
 Package: xcolor 2007/01/21 v2.11 LaTeX color extensions (UK)
@@ -422,23 +493,23 @@ Package xcolor Info: Model `Gray' substituted by `gray' on input line 1359.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1360.
 )
 ("C:\Program Files\MiKTeX 2.9\tex\latex\listings\listings.sty"
-\lst@mode=\count107
+\lst@mode=\count110
 \lst@gtempboxa=\box26
 \lst@token=\toks22
-\lst@length=\count108
-\lst@currlwidth=\dimen140
-\lst@column=\count109
-\lst@pos=\count110
-\lst@lostspace=\dimen141
-\lst@width=\dimen142
-\lst@newlines=\count111
-\lst@lineno=\count112
-\lst@maxwidth=\dimen143
+\lst@length=\count111
+\lst@currlwidth=\dimen143
+\lst@column=\count112
+\lst@pos=\count113
+\lst@lostspace=\dimen144
+\lst@width=\dimen145
+\lst@newlines=\count114
+\lst@lineno=\count115
+\lst@maxwidth=\dimen146
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\listings\lstmisc.sty"
 File: lstmisc.sty 2007/02/22 1.4 (Carsten Heinz)
-\c@lstnumber=\count113
-\lst@skipnumbers=\count114
+\c@lstnumber=\count116
+\lst@skipnumbers=\count117
 \lst@framebox=\box27
 )
 ("C:\Program Files\MiKTeX 2.9\tex\latex\listings\listings.cfg"
@@ -515,30 +586,27 @@ Package tocloft Info: The document has chapter divisions on input line 43.
 \cftsubtabindent=\skip102
 \cftsubtabnumwidth=\skip103
 )
-(C:\Users\Antoine\Documents\GitHub\PluginLoader\Doc\PluginLoaderDevDoc\PluginLo
-aderDevDoc.aux
+("C:\Users\Antoine\Documents\Rapport de prog\instructions.aux")
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 110.
+LaTeX Font Info:    ... okay on input line 110.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 110.
+LaTeX Font Info:    ... okay on input line 110.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 110.
+LaTeX Font Info:    ... okay on input line 110.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 110.
+LaTeX Font Info:    ... okay on input line 110.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 110.
+LaTeX Font Info:    ... okay on input line 110.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 110.
+LaTeX Font Info:    ... okay on input line 110.
+LaTeX Font Info:    Try loading font information for T1+lmr on input line 110.
 
-LaTeX Warning: Label `ITableHelper.java' multiply defined.
-
-
-LaTeX Warning: Label `ITableHelper.java' multiply defined.
-
-
-LaTeX Warning: Label `HelloWorld.java' multiply defined.
-
+("C:\Program Files\MiKTeX 2.9\tex\latex\lm\t1lmr.fd"
+File: t1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 105.
-LaTeX Font Info:    ... okay on input line 105.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 105.
-LaTeX Font Info:    ... okay on input line 105.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 105.
-LaTeX Font Info:    ... okay on input line 105.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 105.
-LaTeX Font Info:    ... okay on input line 105.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 105.
-LaTeX Font Info:    ... okay on input line 105.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 105.
-LaTeX Font Info:    ... okay on input line 105.
+LaTeX Info: Redefining \degres on input line 110.
+LaTeX Info: Redefining \dots on input line 110.
+LaTeX Info: Redefining \up on input line 110.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -576,255 +644,94 @@ LaTeX Font Info:    ... okay on input line 105.
 
 ("C:\Program Files\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count115
-\scratchdimen=\dimen144
+\scratchcounter=\count118
+\scratchdimen=\dimen147
 \scratchbox=\box28
-\nofMPsegments=\count116
-\nofMParguments=\count117
+\nofMPsegments=\count119
+\nofMParguments=\count120
 \everyMPshowfont=\toks23
-\MPscratchCnt=\count118
-\MPscratchDim=\dimen145
-\MPnumerator=\count119
-\makeMPintoPDFobject=\count120
+\MPscratchCnt=\count121
+\MPscratchDim=\dimen148
+\MPnumerator=\count122
+\makeMPintoPDFobject=\count123
 \everyMPtoPDFconversion=\toks24
 )
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: subfig package v1.3 is loaded.
 Package caption Info: listings package is loaded.
 Package caption Info: End \AtBeginDocument code.
-\c@lstlisting=\count121
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 106.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 106.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 106.
-LaTeX Font Info:    Try loading font information for U+lasy on input line 106.
- ("C:\Program Files\MiKTeX 2.9\tex\latex\base\ulasy.fd"
+\c@lstlisting=\count124
+LaTeX Font Info:    Try loading font information for OT1+lmr on input line 111.
+
+ ("C:\Program Files\MiKTeX 2.9\tex\latex\lm\ot1lmr.fd"
+File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    Try loading font information for OML+lmm on input line 111.
+
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\lm\omllmm.fd"
+File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 111
+.
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\lm\omslmsy.fd"
+File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    Try loading font information for OMX+lmex on input line 111
+.
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\lm\omxlmex.fd"
+File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <12> on input line 111.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <8> on input line 111.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <6> on input line 111.
+LaTeX Font Info:    Try loading font information for U+lasy on input line 111.
+
+("C:\Program Files\MiKTeX 2.9\tex\latex\base\ulasy.fd"
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 )
-Overfull \hbox (46.62646pt too wide) in paragraph at lines 106--106
+Overfull \hbox (46.84837pt too wide) in paragraph at lines 111--111
  [][] 
  []
 
 [1
 
-{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}] [1
-
-]
-Chapter 1.
-<images/BuildPath.PNG, id=13, 551.05875pt x 417.81094pt>
-File: images/BuildPath.PNG Graphic file (type png)
-
-<use images/BuildPath.PNG>
-Package pdftex.def Info: images/BuildPath.PNG used on input line 125.
-(pdftex.def)             Requested size: 334.60422pt x 253.704pt.
- [2
-
- <C:/Users/Antoine/Documents/GitHub/PluginLoader/Doc/PluginLoaderDevDoc/images/
-BuildPath.PNG>]
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <10.95> on input line 131.
-
-Overfull \hbox (6.0pt too wide) in paragraph at lines 131--131
-[][][][][][][] 
- []
+{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}]
+LaTeX Font Info:    Try loading font information for T1+lmss on input line 113.
 
 
-Overfull \hbox (6.0pt too wide) in paragraph at lines 131--131
-[][][][][][][] 
- []
-
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 137.
-
-("C:\Program Files\MiKTeX 2.9\tex\latex\base\omscmr.fd"
-File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+("C:\Program Files\MiKTeX 2.9\tex\latex\lm\t1lmss.fd"
+File: t1lmss.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <9> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 137.
 
-Overfull \hbox (6.0pt too wide) in paragraph at lines 148--148
-[][][][][][][] 
- []
+Package caption Warning: Unused \captionsetup[lstlisting] on input line 49.
+See the caption package documentation for explanation.
 
+[1
 
-Overfull \hbox (6.0pt too wide) in paragraph at lines 148--148
-[][][][][][][] 
- []
-
-
-Package Listings Warning: Text dropped after begin of listing on input line 148
-.
-
-LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 158.
-
-Overfull \hbox (6.0pt too wide) in paragraph at lines 165--165
-[][][][][][][] 
- []
-
-
-Overfull \hbox (6.0pt too wide) in paragraph at lines 165--165
-[][][][][][][] 
- []
-
-[3]
-LaTeX Font Info:    Try loading font information for OML+cmr on input line 174.
-
- ("C:\Program Files\MiKTeX 2.9\tex\latex\base\omlcmr.fd"
-File: omlcmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
-)
-LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <10.95> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 174.
- [4]
-Chapter 2.
-
-Overfull \hbox (6.0pt too wide) in paragraph at lines 182--182
-[][][][][][][] 
- []
-
-
-Overfull \hbox (6.0pt too wide) in paragraph at lines 182--182
-[][][][][][][] 
- []
-
-
-Package Listings Warning: Text dropped after begin of listing on input line 182
-.
-
-[5
-
-]
-Overfull \hbox (6.0pt too wide) in paragraph at lines 205--205
-[][][][][][][] 
- []
-
-
-Overfull \hbox (6.0pt too wide) in paragraph at lines 205--205
-[][][][][][][] 
- []
-
-
-(C:\Users\Antoine\Documents\GitHub\PluginLoader\Doc\PluginLoaderDevDoc\sourceFi
-les/PluginTableHelper/src/com/ornicare/tablehelper/TableHelper.java
-LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <9> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 27.
- [6
-
-]
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <9> on input line 54.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 54.
-)
-Overfull \hbox (6.0pt too wide) in paragraph at lines 209--209
-[][][][][][][] 
- []
-
-
-Overfull \hbox (6.0pt too wide) in paragraph at lines 209--209
-[][][][][][][] 
- []
-
-
-(C:\Users\Antoine\Documents\GitHub\PluginLoader\Doc\PluginLoaderDevDoc\sourceFi
-les/PluginTableHelper/src/com/ornicare/tablehelper/ITableHelper.java)
-Overfull \hbox (6.0pt too wide) in paragraph at lines 211--211
-[][][][][][][] 
- []
-
-
-Overfull \hbox (6.0pt too wide) in paragraph at lines 211--211
-[][][][][][][] 
- []
-
-
-(C:\Users\Antoine\Documents\GitHub\PluginLoader\Doc\PluginLoaderDevDoc\sourceFi
-les/PluginTableHelper/src/plugin.properties)
-Overfull \hbox (6.0pt too wide) in paragraph at lines 219--219
-[][][][][][][] 
- []
-
-
-Overfull \hbox (6.0pt too wide) in paragraph at lines 219--219
-[][][][][][][] 
- []
-
-
-(C:\Users\Antoine\Documents\GitHub\PluginLoader\Doc\PluginLoaderDevDoc\sourceFi
-les/PluginTableUser/src/com/ornicare/tableuser/MainClass.java [7]
-LaTeX Font Info:    Font shape `OML/cmr/m/it' in size <9> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 10.
-LaTeX Font Info:    Font shape `OMS/cmr/m/it' in size <9> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 10.
-)
-Overfull \hbox (6.0pt too wide) in paragraph at lines 221--221
-[][][][][][][] 
- []
-
-
-Overfull \hbox (6.0pt too wide) in paragraph at lines 221--221
-[][][][][][][] 
- []
-
-
-(C:\Users\Antoine\Documents\GitHub\PluginLoader\Doc\PluginLoaderDevDoc\sourceFi
-les/PluginTableUser/src/com/ornicare/tableuser/IMainClass.java)
-Overfull \hbox (6.0pt too wide) in paragraph at lines 223--223
-[][][][][][][] 
- []
-
-
-Overfull \hbox (6.0pt too wide) in paragraph at lines 223--223
-[][][][][][][] 
- []
-
-
-(C:\Users\Antoine\Documents\GitHub\PluginLoader\Doc\PluginLoaderDevDoc\sourceFi
-les/PluginTableUser/src/plugin.properties)
-Overfull \hbox (6.0pt too wide) in paragraph at lines 231--231
-[][][][][][][] 
- []
-
-
-Overfull \hbox (6.0pt too wide) in paragraph at lines 231--231
-[][][][][][][] 
- []
-
-[8] [9]
-Chapter 3.
-[10
-
-]
-(C:\Users\Antoine\Documents\GitHub\PluginLoader\Doc\PluginLoaderDevDoc\PluginLo
-aderDevDoc.aux)
-
-LaTeX Warning: There were multiply-defined labels.
-
- ) 
+] ("C:\Users\Antoine\Documents\Rapport de prog\instructions.aux") ) 
 Here is how much of TeX's memory you used:
- 6279 strings out of 493921
- 90380 string characters out of 3147277
- 279521 words of memory out of 3000000
- 9460 multiletter control sequences out of 15000+200000
- 15218 words of font info for 56 fonts, out of 3000000 for 9000
+ 6781 strings out of 493921
+ 96916 string characters out of 3147277
+ 182909 words of memory out of 3000000
+ 9957 multiletter control sequences out of 15000+200000
+ 39421 words of font info for 37 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 44i,12n,43p,408b,1731s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/P
-rogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program F
-iles/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi9.pfb><C:/Program Files/MiKT
-eX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fo
-nts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1
-/public/amsfonts/cm/cmr17.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/a
-msfonts/cm/cmr9.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
-/cmss10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmss12.
-pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmss17.pfb><C:/
-Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program 
-Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy9.pfb><C:/Program Files/MiK
-TeX 2.9/fonts/type1/public/amsfonts/cm/cmti9.pfb>
-Output written on PluginLoaderDevDoc.pdf (11 pages, 200334 bytes).
+ 44i,6n,43p,277b,219s stack positions out of 5000i,500n,10000p,200000b,50000s
+{C:/Program 
+Files/MiKTeX 2.9/fonts/enc/dvips/lm/lm-ec.enc}<C:/Program Files/MiKTeX 2.9/font
+s/type1/public/lm/lmcsc10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/l
+m/lmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/lm/lmr12.pfb><C:/Pr
+ogram Files/MiKTeX 2.9/fonts/type1/public/lm/lmr17.pfb><C:/Program Files/MiKTeX
+ 2.9/fonts/type1/public/lm/lmss17.pfb>
+Output written on instructions.pdf (2 pages, 121871 bytes).
 PDF statistics:
- 93 PDF objects out of 1000 (max. 8388607)
+ 30 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 6 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
