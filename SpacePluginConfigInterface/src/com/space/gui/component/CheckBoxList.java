@@ -21,7 +21,7 @@ import javax.swing.UIManager;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
-public class CheckBoxList extends JList<Object> {
+public class CheckBoxList extends JList {
  
     /** */
     private static final long serialVersionUID = 1L;
@@ -47,9 +47,9 @@ public class CheckBoxList extends JList<Object> {
         setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
  
-    protected class CellRenderer implements ListCellRenderer<Object> {
+    protected class CellRenderer implements ListCellRenderer {
         @Override
-        public Component getListCellRendererComponent(final JList<?> list,
+        public Component getListCellRendererComponent(final JList list,
                 final Object value, final int index, final boolean isSelected,
                 final boolean cellHasFocus) {
             JCheckBox checkbox = (JCheckBox) value;
@@ -65,7 +65,7 @@ public class CheckBoxList extends JList<Object> {
     }
  
     public void addCheckbox(final JCheckBox checkBox) {
-        ListModel<?> currentList = this.getModel();
+        ListModel currentList = this.getModel();
         JCheckBox[] newList = new JCheckBox[currentList.getSize() + 1];
         for (int i = 0; i < currentList.getSize(); i++) {
             newList[i] = (JCheckBox) currentList.getElementAt(i);
