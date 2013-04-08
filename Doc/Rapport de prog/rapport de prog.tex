@@ -124,7 +124,7 @@ Tout d'abord, voici, grossièrement, l'organisation de notre programme.
 Deux types de plugins sont disponibles : 
 \begin{itemize}
 \item Les plugins exécutables : destinés à être exécutés, ils héritent de PluginRunnable, contenant une méthode run qui nécessite d'être ré implémenté.
-\item Les autres plugins : ils ne sont destinés qu'à fournir du contenu. Il héritent de PluginContentProvider.
+\item Les autres plugins : ils ne sont destinés qu'à fournir du contenu. Ils héritent de PluginContentProvider.
 \end{itemize}
 Chaque plugin est interfacé avec la plateforme via une instance enfant de PluginBase. Toutes ces instances sont connues du PluginManager.
 \begin{figure}[h]
@@ -160,7 +160,7 @@ Ceci étant dit, nos plugins pouvaient désormais communiquer, via leurs emplace
 \section{Vers la connaissance de l'autre}
 
 
-C'est bien beau de pouvoir lancer un jar, mais bon, être obligé de le faire manuellement c'est rédhibitoire. Dans cette optique, nous avons introduit un fichier properties donnant une rapide description du plugin : son nom, s'il contient une run, la classe contentant la run, doit-t-il être chargé paresseusement ou encore est-ce un singleton ? (les deux dernières se verraient implémentées de façons formelles bien plus tard).
+C'est bien beau de pouvoir lancer un jar, mais bon, être obligé de le faire manuellement c'est rédhibitoire. Dans cette optique, nous avons introduit un fichier properties donnant une rapide description du plugin : son nom, s'il contient une run, la classe contentant la run, doit-il être chargé paresseusement ou encore est-ce un singleton ? (les deux dernières se verraient implémentées de façons formelles bien plus tard).
 S'en suivit une refonte, que dis-je, une réécriture complète du code pour créer des descripteurs de plugins génériques (à savoir \og{}PluginBase\fg).
 
 
@@ -180,7 +180,7 @@ G : null
 \end{lstlisting}
 Nous obtenons alors un diagramme de dépendance de cette forme (voir figure \ref{DG}), créant par la même occasion trois groupes distincts. Chaque groupe aura son propre ClassLoader, et dans l'éventualité de la nécessité d'un plugin dont on ne dépend pas (par exemple pour un jeu chargeant des monstres à la volée, si Bob veut ajouter son monstre, il ne va pas modifier le properties de la base) on y aura accès via getPlugin.
 \begin{figure}[h]
-\caption{\label{DG} Groupe de dépendance}
+\caption{\label{DG} Groupes de dépendance}
 \centering
 \includegraphics[width=0.9\textwidth]{images/DG.png}
 \end{figure}
@@ -189,7 +189,7 @@ Nous obtenons alors un diagramme de dépendance de cette forme (voir figure \ref
 \section{La paresse est au rendez-vous !}
 
 
-Ceci résolu, nous nous attaquâmes à l'implémentation du chargement paresseux. L'InstanceHandler fit son apparition. Son utilité ? Permettre la communication de nos plugins via le plugin manager, et via des proxy. Un autre problème fit son apparition : dans cette optique nous nous sommes retrouvés à demander au concepteur du plugin de fournir une interface pour sa classe principale, proxies obligeant.
+Ceci résolu, nous nous attaquâmes à l'implémentation du chargement paresseux. L'InstanceHandler fit son apparition. Son utilité ? Permettre la communication de nos plugins via le plugin manager, et via des proxys. Un autre problème fit son apparition : dans cette optique nous nous sommes retrouvés à demander au concepteur du plugin de fournir une interface pour sa classe principale, proxys obligeants (ceux-ci permirent par la même occasion l'implémentation du chargement paresseux et du singleton).
 C'est ainsi que se termina la création de notre plate-forme de plugins.
 
 
