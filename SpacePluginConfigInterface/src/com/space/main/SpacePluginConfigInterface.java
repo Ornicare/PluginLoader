@@ -10,14 +10,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.space.gui.window.MainWindow;
-import com.space.plugin.IPluginRunnable;
+import com.space.plugin.PluginRunnable;
 
 
 /**
  * @author CLEm
  *
  */
-public class SpacePluginConfigInterface implements IPluginRunnable {
+public class SpacePluginConfigInterface extends PluginRunnable {
 	
 	public static String[] getAvailablePlugins() {
 		
@@ -61,7 +61,7 @@ public class SpacePluginConfigInterface implements IPluginRunnable {
 	}
 	
 	@Override
-	public void run() throws Exception {
+	public void run() {
 		String[] availablePlugins = getAvailablePlugins();
 		@SuppressWarnings("unused")
 		MainWindow mainWindow = new MainWindow( availablePlugins ); 
