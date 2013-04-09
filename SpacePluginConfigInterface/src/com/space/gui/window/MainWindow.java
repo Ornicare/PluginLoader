@@ -37,12 +37,12 @@ public class MainWindow extends JFrame {
     private CheckBoxList list01;
     
 //    private CheckBoxListScrollPane list02;
-    @SuppressWarnings("unused")
 	private List<String> selectedList01;
 //    private List<String> selectedList02;
 
 
 
+	@SuppressWarnings("unused")
 	private SpacePluginConfigInterface spacePluginConfigInterface;
     
     
@@ -76,7 +76,7 @@ public MainWindow( String[] availablePlugins, final SpacePluginConfigInterface s
         	String[] initData01 = availablePlugins;
         	this.list01.addCheckbox(initData01);
         	
-        	JButton btnNewButton = new JButton("Ok");
+        	JButton btnNewButton = new JButton("Run");
         	btnNewButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(final ActionEvent arg0) {
@@ -92,7 +92,7 @@ public MainWindow( String[] availablePlugins, final SpacePluginConfigInterface s
             btnNewButton.setBounds(5, 365, 80, 40);
             this.contentPane.add(btnNewButton);
             
-            JLabel lblNewLabel = new JLabel("SÃ©lectionner les plugins Ã  activer: ");
+            JLabel lblNewLabel = new JLabel("Sélectionner les plugins à activer: ");
             lblNewLabel.setBounds(5, 5, 300, 35);
             contentPane.add(lblNewLabel);
             
