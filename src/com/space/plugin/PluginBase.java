@@ -39,6 +39,7 @@ public abstract class PluginBase{
 	
 	protected Class<?> classToLoad;
 	protected Class<?> mainClassInstance;
+	private Object proxy;
 	
 	/**
 	 * 
@@ -177,11 +178,21 @@ public abstract class PluginBase{
 		
 		//Get the classloader if not exists.
 		if(!initialized) initialize();
-		return Proxy.newProxyInstance(classLoader, getMainClass().getInterfaces(), h);
+		if(!singleton || this.proxy==null) this.proxy = Proxy.newProxyInstance(classLoader, getMainClass().getInterfaces(), h);
+		return proxy;
+	}
+	
+	public Object getProxy(Object[] args, Class<?>[] argsType) {
+		InstanceHandler h = new InstanceHandler(this, internalLazy, args, argsType);
+		
+		//Get the classloader if not exists.
+		if(!initialized) initialize();
+		if(!singleton || this.proxy==null) this.proxy = Proxy.newProxyInstance(classLoader, getMainClass().getInterfaces(), h);
+		return proxy;
 	}
 
 	public Object getInstance() {
-		return instance==null || !singleton ?createInstance():instance;
+		return (!singleton || instance == null)?createInstance():instance;
 	}
 	
 	/**
@@ -192,9 +203,8 @@ public abstract class PluginBase{
 	 * @return
 	 */
 	public Object getInstance(Object[] args, Class<?>[] argsType) {
+		if(singleton && instance != null) return instance;
 		if(!initialized) initialize();
-		
-		Object localInstance = null;
 		
 		//If not existing, try to create the args model.
 		if(argsType==null) {
@@ -212,13 +222,13 @@ public abstract class PluginBase{
 			Validate.notNull(classToLoad, "Invalid main class.");
 			
 			Constructor<?> constructor = classToLoad.getConstructor(argsType);
-			localInstance = constructor.newInstance(args);
+			instance = constructor.newInstance(args);
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
 		
 
-		return localInstance;
+		return instance;
 	}
 	
 	public Class<?> getMainClass() {
@@ -233,9 +243,9 @@ public abstract class PluginBase{
 
 	protected Object createInstance() {
 		
-		if(!initialized) initialize();
+		if(singleton && instance != null) return instance;
 		
-		if(internalLazy) this.initialized = true;
+		if(!initialized) initialize();
 		
     	/*for(URL path : classLoader.getURLs()) {
     		System.out.println(getName()+" "+path.getPath());
@@ -257,13 +267,7 @@ public abstract class PluginBase{
 		return instance;
 	}
 
-	public Object getProxy(Object[] args, Class<?>[] argsType) {
-		InstanceHandler h = new InstanceHandler(this, internalLazy, args, argsType);
-		
-		//Get the classloader if not exists.
-		if(!initialized) initialize();
-		return Proxy.newProxyInstance(classLoader, getMainClass().getInterfaces(), h);
-	}
+
 
 
 
