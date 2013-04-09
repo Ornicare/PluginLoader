@@ -24,7 +24,7 @@ public class CheckListRenderer extends JCheckBox implements ListCellRenderer
 	
 	@Override
 	public Component getListCellRendererComponent( 
-			@SuppressWarnings("rawtypes") JList list, 
+			JList list, 
 			Object value,
 			int index,
 			boolean isSelected, 
