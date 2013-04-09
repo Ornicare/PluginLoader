@@ -66,10 +66,10 @@ public class PluginManager {
         		Properties prop = loadConfig(file);
             	if(prop!=null) {
             		if(prop.containsKey("runnable") && prop.getProperty("runnable").equals("true")) {
-                		register(new PluginRunnableWrapper(file.getPath(),this, prop));
+                		register(new PluginRunnableWrapper(file.getAbsolutePath(),this, prop));
                 	}
                 	else {
-                		register(new PluginContentProviderWrapper(file.getPath(),this, prop));
+                		register(new PluginContentProviderWrapper(file.getAbsolutePath(),this, prop));
                 	}
             	}
         	}
@@ -105,7 +105,7 @@ public class PluginManager {
     		for(PluginBase pB : pBL) {
     			URL fileURL = null;
     			try {
-    				fileURL = new URL("file:///"+path+"/"+pB.getJarName()+".jar");
+    				fileURL = new URL("file:///"+pB.getPath());
     			} catch (MalformedURLException e) {
     				e.printStackTrace();
     			}

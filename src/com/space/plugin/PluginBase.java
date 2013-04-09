@@ -166,7 +166,14 @@ public abstract class PluginBase{
 	 * @return
 	 */
 	public Object getJarName() {
-		return pluginJarName.substring(8).substring(0, pluginJarName.length()-12);
+		String output;
+		if(pluginJarName.lastIndexOf("/")<0) {
+			output = pluginJarName.substring(pluginJarName.lastIndexOf("\\"), pluginJarName.length());
+		}
+		else {
+			output = pluginJarName.substring(pluginJarName.lastIndexOf("/"), pluginJarName.length());
+		}
+		return output;
 	}
 
 	public void setGrouId(int groupId) {
@@ -265,6 +272,10 @@ public abstract class PluginBase{
 		
 
 		return instance;
+	}
+	
+	public String getPath() {
+		return pluginJarName;
 	}
 
 
