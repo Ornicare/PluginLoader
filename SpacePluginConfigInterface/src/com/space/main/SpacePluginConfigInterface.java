@@ -41,7 +41,7 @@ public class SpacePluginConfigInterface extends PluginRunnable {
 		List<String> listeFichiers = new ArrayList<String>();
 		
 		String path = "";
-		String filtre = "jar$"; 
+		String filtre = ".*jar$"; 
 		
 		Pattern p = Pattern.compile(filtre);
 		
