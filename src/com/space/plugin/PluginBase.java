@@ -243,6 +243,7 @@ public abstract class PluginBase{
 		try {
 			mainClassInstance = classLoader.loadClass(mainClass);
 		} catch (ClassNotFoundException e) {
+			System.err.println("Is the main class valid ?");
 			e.printStackTrace();
 		}
 		return mainClassInstance;
@@ -261,7 +262,7 @@ public abstract class PluginBase{
 		
 
 		try {
-			classToLoad = classLoader.loadClass(mainClass);
+			classToLoad = getMainClass();
 			Validate.notNull(classToLoad, "Invalid main class.");
 			
 			
