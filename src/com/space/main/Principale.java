@@ -2,7 +2,10 @@ package com.space.main;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
+import com.space.enums.LaunchPriority;
 import com.space.plugin.PluginBase;
 import com.space.plugin.PluginCommonMethods;
 import com.space.plugin.PluginManager;
@@ -20,6 +23,7 @@ public class Principale {
 		if(args.length>0) {
 			directory = args[0];
 		}
+		
 		/*
 		 * Create the pluginManager
 		 */
@@ -53,16 +57,31 @@ public class Principale {
     	}
 		
     	/*
-    	 * Run launchables plugins 
+    	 * Create priority Hash
     	 */
+    	Map<PluginRunnableWrapper,LaunchPriority> pList = new HashMap<PluginRunnableWrapper,LaunchPriority>();
     	for(String pluginName : pluginManager.getPluginList()) {
     		PluginBase pB = pluginManager.getPlugin(pluginName);
     		if(pB.isLaunchable() && pB.getClass().isAssignableFrom(PluginRunnableWrapper.class)) {
     			PluginRunnableWrapper runnablePB = (PluginRunnableWrapper) pB;
-    			System.out.println("Running : "+pB.getName());
-    			runnablePB.run();
+    			pList.put(runnablePB, runnablePB.getPriority());
     		}
     	}
+    	
+    	
+    	/*
+    	 * Run launchables plugins 
+    	 */
+    	
+    	
+    	for(LaunchPriority lp : LaunchPriority.getOrder()) {
+    		for(PluginRunnableWrapper runnablePB : pList.keySet()) {
+	    		if(runnablePB.getPriority()==lp) {
+	    			System.out.println("\nRunning : "+runnablePB.getName());
+	    			runnablePB.run();
+	    		}
+	    	}
+    	}	
 	}
 
 }
