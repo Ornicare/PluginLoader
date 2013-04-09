@@ -47,7 +47,7 @@ public class SpacePluginConfigInterface extends PluginRunnable {
 		
 		path = new File("").getAbsolutePath();
 		System.out.println(path);
-		String[] s = new File(path + "\\plugins").list();
+		String[] s = new File(path + "/plugins").list();
 		System.out.println(s.length);
 		
 		for ( int i = 0 ; i < s.length ; i++ ) {
