@@ -31,11 +31,11 @@ public class TopMenuBar {
         menuBar = new JMenuBar();
 
         //*/ Fichier 
-        menu = new JMenu( "Fichier" ); 
+        menu = new JMenu( "File" ); 
         
         menu.setMnemonic( KeyEvent.VK_F ); 
         menu.getAccessibleContext().setAccessibleDescription( 
-        	"Fichier de l'emploi du temps" 
+        	"File" 
         ); 
         menuBar.add( menu ); 
         {
@@ -50,7 +50,7 @@ public class TopMenuBar {
 //					KeyStroke.getKeyStroke( KeyEvent.VK_N, ActionEvent.CTRL_MASK ) 
 //				); 
 //				menuItem.getAccessibleContext().setAccessibleDescription( 
-//					"Créer" 
+//					"Crï¿½er" 
 //				); 
 //			
 //			menu.add( menuItem );
@@ -59,7 +59,7 @@ public class TopMenuBar {
 			menu.add( new JSeparator() );
 			
 			// Quit 
-			menuItem = new JMenuItem( "Quitter" ); 
+			menuItem = new JMenuItem( "Quit" ); 
 				
 				handleQuitter = new HandleQuitter( parentFrame ); 
 				menuItem.addActionListener( handleQuitter ); 
@@ -69,7 +69,7 @@ public class TopMenuBar {
 					KeyStroke.getKeyStroke( KeyEvent.VK_F4, ActionEvent.ALT_MASK ) 
 				); 
 				menuItem.getAccessibleContext().setAccessibleDescription( 
-					"Quitter" 
+					"Quit" 
 				); 
 				
 			menu.add( menuItem ); 
