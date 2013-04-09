@@ -8,6 +8,8 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.List;
 
+import com.space.annotations.LaunchInfo;
+import com.space.enums.LaunchPriority;
 import com.space.gui.window.MainWindow;
 import com.space.plugin.IPluginRunnable;
 import com.space.plugin.PluginRunnable;
@@ -61,12 +63,17 @@ public class SpacePluginConfigInterface extends PluginRunnable {
 	}*/
 	
 	@Override
+	@LaunchInfo(priority = LaunchPriority.HIGHEST)
 	public void run() {
 		String[] availablePlugins = getPluginImplementationsOf(IPluginRunnable.class).toArray(new String[0]);
 		@SuppressWarnings("unused")
 		MainWindow mainWindow = new MainWindow( availablePlugins, this ); 
 	}
 
+	/**
+	 * Launch the selected list of plugins.
+	 * @param selectedList01
+	 */
 	public void launch(List<String> selectedList01) {
 		for(String s : selectedList01) {
 			try {
