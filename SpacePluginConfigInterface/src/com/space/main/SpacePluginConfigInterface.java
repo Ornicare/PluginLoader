@@ -3,13 +3,13 @@
  */
 package com.space.main;
 
-import java.io.File;
-import java.util.ArrayList;
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import com.space.gui.window.MainWindow;
+import com.space.plugin.IPluginRunnable;
 import com.space.plugin.PluginRunnable;
 
 
@@ -19,7 +19,7 @@ import com.space.plugin.PluginRunnable;
  */
 public class SpacePluginConfigInterface extends PluginRunnable {
 	
-	public static String[] getAvailablePlugins() {
+	/*public static String[] getAvailablePlugins() {
 		
 		// TODO demander au manager
 		
@@ -58,13 +58,29 @@ public class SpacePluginConfigInterface extends PluginRunnable {
 		}
 		
 		return listeFichiers.toArray(new String[listeFichiers.size()]);
-	}
+	}*/
 	
 	@Override
 	public void run() {
-		String[] availablePlugins = getAvailablePlugins();
+		String[] availablePlugins = getPluginImplementationsOf(IPluginRunnable.class).toArray(new String[0]);
 		@SuppressWarnings("unused")
-		MainWindow mainWindow = new MainWindow( availablePlugins ); 
+		MainWindow mainWindow = new MainWindow( availablePlugins, this ); 
+	}
+
+	public void launch(List<String> selectedList01) {
+		for(String s : selectedList01) {
+			try {
+				Class<?> clazz = PluginRunnable.class;
+				Method m = clazz.getMethod("run");
+				
+				Proxy proxy = (Proxy) getPlugin(s);
+				InvocationHandler ih = Proxy.getInvocationHandler(proxy);
+				ih.invoke(proxy, m, null);
+			} catch (Throwable e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 	
 }

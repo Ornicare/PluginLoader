@@ -13,7 +13,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import com.space.gui.component.*;
+import com.space.gui.component.CheckBoxList;
+import com.space.gui.component.TopMenuBar;
+import com.space.main.SpacePluginConfigInterface;
 
 
 
@@ -33,17 +35,23 @@ public class MainWindow extends JFrame {
 	/** */
     private JPanel contentPane;
     private CheckBoxList list01;
+    
 //    private CheckBoxListScrollPane list02;
     @SuppressWarnings("unused")
 	private List<String> selectedList01;
 //    private List<String> selectedList02;
+
+
+
+	private SpacePluginConfigInterface spacePluginConfigInterface;
     
     
     
-public MainWindow( String[] availablePlugins ) {
+public MainWindow( String[] availablePlugins, final SpacePluginConfigInterface spacePluginConfigInterface ) {
 		this.setTitle( "Space" ); 
 		this.setSize( 320, 480 ); 
 		this.setLocationRelativeTo( null ); 
+		this.spacePluginConfigInterface = spacePluginConfigInterface;
 		
 		// *** components ***
 			// top menu bar 
@@ -74,9 +82,11 @@ public MainWindow( String[] availablePlugins ) {
                 public void actionPerformed(final ActionEvent arg0) {
                     selectedList01 = list01.getCheckedItems();
                     
-                    // TODO actions sur selected elems
+                    //System.out.println(selectedList01);
                     
-                    dispose();
+                    spacePluginConfigInterface.launch(selectedList01);
+    
+                    //dispose();
                 }
             });
             btnNewButton.setBounds(5, 365, 80, 40);
@@ -92,6 +102,8 @@ public MainWindow( String[] availablePlugins ) {
         
         // draw 
 		this.setVisible( true ); 
+		
+		
 	}
 	
 //	/**

@@ -10,7 +10,9 @@ package com.space.gui.component;
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
  
 import javax.swing.JCheckBox;
 import javax.swing.JList;
@@ -111,7 +113,7 @@ public class CheckBoxList extends JList {
     }
  
     public java.util.List<String> getCheckedItems() {
-        java.util.List<String> list = new java.util.ArrayList<String>();
+        List<String> list = new ArrayList<String>();
         int size = getModel().getSize();
         for (int i = 0; i < size; ++i) {
             Object obj = getModel().getElementAt(i);
