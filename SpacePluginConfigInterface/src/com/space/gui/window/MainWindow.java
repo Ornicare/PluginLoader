@@ -92,7 +92,7 @@ public MainWindow( String[] availablePlugins, final SpacePluginConfigInterface s
             btnNewButton.setBounds(5, 365, 80, 40);
             this.contentPane.add(btnNewButton);
             
-            JLabel lblNewLabel = new JLabel("Sélectionner les plugins à activer: ");
+            JLabel lblNewLabel = new JLabel("Check the plugins you want to run : ");
             lblNewLabel.setBounds(5, 5, 300, 35);
             contentPane.add(lblNewLabel);
             
