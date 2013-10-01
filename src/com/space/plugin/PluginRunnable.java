@@ -5,7 +5,6 @@ public abstract class PluginRunnable extends PluginCommonMethods implements IPlu
 	/**
 	 * Do nothing
 	 */
-	@Override
 	public abstract void run() throws Exception;
 
 }

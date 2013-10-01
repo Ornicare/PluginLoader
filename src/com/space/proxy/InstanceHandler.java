@@ -39,7 +39,6 @@ public class InstanceHandler implements InvocationHandler{
 		if(!lazy) createNewInstance();
 	}
 
-	@Override
 	public Object invoke(Object pseudoObject, Method m, Object[] args)
 			throws Throwable {
 		if(realObject == null) createNewInstance();

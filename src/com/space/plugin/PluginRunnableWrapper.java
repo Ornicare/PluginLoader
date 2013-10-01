@@ -22,7 +22,6 @@ public class PluginRunnableWrapper extends PluginBase implements IPluginRunnable
 	/**
 	 * Try to run the main class of the plugin (gives in the plugin's configuration.
 	 */
-	@Override
 	public void run() throws Exception   {
 		if(instance == null || classToLoad == null || method == null || !singleton) createRunMethod();
 

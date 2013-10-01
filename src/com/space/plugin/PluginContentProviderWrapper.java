@@ -18,7 +18,6 @@ public class PluginContentProviderWrapper extends PluginBase implements IPluginC
 	/**
 	 * Stub
 	 */
-	@Override
 	public Object getObject(Object... args) {
 		return null;
 	}
