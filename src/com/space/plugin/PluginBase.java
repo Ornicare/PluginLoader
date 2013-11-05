@@ -20,7 +20,7 @@ public abstract class PluginBase{
 	
 	private Properties config;
 	protected URLClassLoader classLoader;
-	private String pluginJarName;
+	protected String pluginJarName;
 	private String name;
 	protected boolean initialized = false;
 	private PluginManager pluginManager;
@@ -81,7 +81,7 @@ public abstract class PluginBase{
 	 * 
 	 * @param config
 	 */
-	private void loadConfig(Properties config) {
+	protected void loadConfig(Properties config) {
     	mainClass = config.getProperty("main");
     	
     	internalLazy = getPropertyBool("lazy");
@@ -167,11 +167,17 @@ public abstract class PluginBase{
 	 */
 	public Object getJarName() {
 		String output;
-		if(pluginJarName.lastIndexOf("/")<0) {
-			output = pluginJarName.substring(pluginJarName.lastIndexOf("\\"), pluginJarName.length());
+
+		String pluginJarNameTemp = pluginJarName;
+		if(!pluginJarName.endsWith(".jar")) {
+			pluginJarNameTemp = pluginJarNameTemp.substring(0, pluginJarNameTemp.length()-5);
+		}
+	
+		if(pluginJarNameTemp.lastIndexOf("/")<0) {
+			output = pluginJarNameTemp.substring(pluginJarNameTemp.lastIndexOf("\\"), pluginJarNameTemp.length());
 		}
 		else {
-			output = pluginJarName.substring(pluginJarName.lastIndexOf("/"), pluginJarName.length());
+			output = pluginJarNameTemp.substring(pluginJarNameTemp.lastIndexOf("/"), pluginJarNameTemp.length());
 		}
 		return output;
 	}

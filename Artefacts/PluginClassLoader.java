@@ -38,6 +38,10 @@ public class PluginClassLoader extends URLClassLoader{
     public PluginClassLoader( URL[] urls, ClassLoader parent, PluginManager pluginManager, String[] dependancies )
     {
         super(urls, null);
+        System.out.println("zcdqds");
+        for(URL u : urls) System.out.println(u.toString());
+        
+        
         this.parent = parent;
         this.pluginManager=pluginManager;
         this.dependancies = dependancies;
@@ -54,6 +58,7 @@ public class PluginClassLoader extends URLClassLoader{
     @Override
     public Class<?> findClass(String name)
     {
+    	System.out.println("Kaboom");
         try
         {
             // first try to use the URLClassLoader findClass

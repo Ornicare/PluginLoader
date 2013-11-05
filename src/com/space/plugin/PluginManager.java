@@ -1,6 +1,7 @@
 package com.space.plugin;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -12,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.jar.JarFile;
+
 
 
 /**
@@ -46,8 +48,8 @@ public class PluginManager {
 	public PluginManager(ClassLoader parent) {
 		this.parent = parent;
 	}
-	
-	/**
+    
+    /**
      * Loads the plugins contained within the specified directory
      *
      * @param directory Directory to check for plugins
@@ -56,7 +58,7 @@ public class PluginManager {
      */
     public List<PluginBase> preLoadPlugins(File directory) throws Exception {
         Validate.notNull(directory, "Directory cannot be null");
-        Validate.isTrue(directory.isDirectory(), "Directory must be a directory");
+        Validate.isTrue(directory.isDirectory(), "Directory must be a directory ["+directory.getAbsolutePath()+"]");
 
         List<PluginBase> result = new ArrayList<PluginBase>();
         
@@ -69,8 +71,20 @@ public class PluginManager {
                 		register(new PluginRunnableWrapper(file.getAbsolutePath(),this, prop));
                 	}
                 	else {
-                		register(new PluginContentProviderWrapper(file.getAbsolutePath(),this, prop));
+                		register(new PluginRunnableWrapper(file.getAbsolutePath(),this, prop));
                 	}
+            	}
+        	}
+        	else if(file.isDirectory()){
+        		//TODO checkyChekoCheka
+        		Properties config = new Properties();
+        		config.load(new FileInputStream(new File(file.getAbsoluteFile()+"/plugin.properties")));
+        		
+        		if(config.containsKey("runnable") && config.getProperty("runnable").equals("true")) {
+            		register(new PluginRunnableWrapper(file.getAbsolutePath()+"/bin/",this, config));
+            	}
+            	else {
+            		register(new PluginRunnableWrapper(file.getAbsolutePath()+"/bin/",this, config));
             	}
         	}
         }
@@ -98,6 +112,7 @@ public class PluginManager {
         	}
     		id++;
     	}*/
+    	
     	
     	int groupId = 0;
     	for(ArrayList<PluginBase> pBL : groupedLoadedPlugins) {
