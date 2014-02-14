@@ -25,6 +25,16 @@ public class PluginExternalizer extends PluginRunnable{
 	}
 	
 	/**
+	 * Run the plugin <code>name</code> if found and if implements <code>IPluginRunnable</code>, null otherwise.
+	 * 
+	 * @param name plugin's name.
+	 * @return
+	 */
+	public Object runPlugin(String name) {
+		return super.runPlugin(name);
+	}
+	
+	/**
 	 * Return plugins that are assignables from <code>clazz</code>.
 	 * 
 	 * @param clazz
@@ -41,6 +51,10 @@ public class PluginExternalizer extends PluginRunnable{
 	 */
 	public ArrayList<String> getPluginList() {
 		return super.getPluginList();
+	}
+	
+	public String getPluginPath(String name) {
+		return super.getPluginPath(name);
 	}
 	
 	/**

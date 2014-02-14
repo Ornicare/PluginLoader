@@ -7,4 +7,8 @@ public abstract class PluginRunnable extends PluginCommonMethods implements IPlu
 	 */
 	public abstract void run() throws Exception;
 
+	public void run(Object... args) throws Exception {
+		run();
+	}
+
 }

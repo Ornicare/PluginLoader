@@ -120,7 +120,7 @@ public class PluginManager {
     		for(PluginBase pB : pBL) {
     			URL fileURL = null;
     			try {
-    				fileURL = new URL("file:///"+pB.getPath());
+    				fileURL = new File(pB.getPath()).toURI().toURL();//new URL("file:///"+pB.getPath());
     			} catch (MalformedURLException e) {
     				e.printStackTrace();
     			}
@@ -133,7 +133,7 @@ public class PluginManager {
 			URL[] tabURL = new URL[plugins.size()];
 			
 			for(int i = 0;i<plugins.size();i++) {
-				tabURL[i] = plugins.get(i);
+				tabURL[i] = plugins.get(i);			
 			}
     		groupedClassLoader.put(groupId, getNewClassLoader(tabURL));
     		groupId++;

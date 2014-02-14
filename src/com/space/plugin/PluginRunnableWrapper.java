@@ -34,6 +34,21 @@ public class PluginRunnableWrapper extends PluginBase implements IPluginRunnable
 		method.invoke(instance);
 	}
 	
+	@Override
+	public void run(Object... args) throws Exception {
+		if(instance == null || classToLoad == null || method == null || !singleton) createRunMethodWithArgs();
+
+		method.invoke(instance);
+	}
+	
+	private void createRunMethodWithArgs() throws NoSuchMethodException, SecurityException {
+		createInstance();
+		Class<?>[] argsType = {(new Object[0]).getClass()};
+		if(method==null) method = classToLoad.getDeclaredMethod("run", argsType);
+		
+		Validate.isTrue(IPluginRunnable.class.isAssignableFrom(classToLoad),"Main class doesn't implement IPluginRunnable");
+	}
+
 	/**
 	 * Create objects to run the plugin.
 	 * 
@@ -42,9 +57,8 @@ public class PluginRunnableWrapper extends PluginBase implements IPluginRunnable
 	//TODO in case of STATIC class ? V�rifier Lazy.
 	protected void createRunMethod() throws Exception {
 		createInstance();
-		if(method==null) method = classToLoad.getDeclaredMethod("run");;
+		if(method==null) method = classToLoad.getDeclaredMethod("run");
 		
-		//TODO v�rifier condition
 		Validate.isTrue(IPluginRunnable.class.isAssignableFrom(classToLoad),"Main class doesn't implement IPluginRunnable");
 		
 		//System.out.println(method.getReturnType().getName());

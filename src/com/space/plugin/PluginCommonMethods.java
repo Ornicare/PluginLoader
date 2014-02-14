@@ -1,5 +1,8 @@
 package com.space.plugin;
 
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,6 +38,43 @@ public abstract class PluginCommonMethods {
 	protected Object getPlugin(String name) {
 		PluginBase plugin = pluginManager.getPlugin(name);
 		return plugin==null?null:plugin.getProxy();
+	}
+	
+	public String getPluginPath(String name) {
+		PluginBase plugin = pluginManager.getPlugin(name);
+		return plugin==null?null:plugin.getPath();
+	}
+	
+	/**
+	 * Run the plugin <code>name</code> if found and if implements <code>IPluginRunnable</code>, and return it. Return null if it get an error.
+	 * 
+	 * @param name plugin's name.
+	 * @return
+	 * @throws SecurityException 
+	 * @throws NoSuchMethodException 
+	 */
+	public Object runPlugin(String name) {
+		Class<PluginRunnable> l_oClazz = PluginRunnable.class;
+        Method m = null;
+		try {
+			m = l_oClazz.getMethod("run", new Class[0]);
+		} catch (NoSuchMethodException | SecurityException e1) {
+			e1.printStackTrace();
+			return null;
+		}
+        
+        PluginBase plugin = pluginManager.getPlugin(name);
+        Proxy l_oProxy = (Proxy) (plugin==null?null:plugin.getProxy());
+		if(l_oProxy==null) return null;
+	
+        InvocationHandler l_oIh = Proxy.getInvocationHandler(l_oProxy);
+        try {
+			l_oIh.invoke(l_oProxy, m, null);
+		} catch (Throwable e) {
+			e.printStackTrace();
+			return null;
+		}
+		return l_oProxy;
 	}
 	
 	/**

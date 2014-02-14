@@ -15,7 +15,7 @@ import com.space.proxy.InstanceHandler;
  * @author Ornicare
  *
  */
-public abstract class PluginBase{
+public abstract class PluginBase implements IPluginBase{
 
 	
 	private Properties config;
@@ -55,10 +55,10 @@ public abstract class PluginBase{
 		loadConfig(config);
 	}
 	
-	/**
-	 * Do we need to automatically run it ?
-	 * @return
+	/* (non-Javadoc)
+	 * @see com.space.plugin.IPluginBase#isLaunchable()
 	 */
+	@Override
 	public boolean isLaunchable() {
 		return runInFirst;
 	}
@@ -132,22 +132,20 @@ public abstract class PluginBase{
         return classLoader;
     }
     
-    /**
-     * Return plugin true name.
-     * 
-     * @return
-     */
-    public String getName() {
+    /* (non-Javadoc)
+	 * @see com.space.plugin.IPluginBase#getName()
+	 */
+    @Override
+	public String getName() {
     	if(name==null) this.name = config.getProperty("name");
     	Validate.notNull(name, pluginJarName+" : invalide properties file : name not found.");
     	return name;
     }
 
-    /**
-     * Calculate plugin's dependancies.
-     * 
-     * @return
-     */
+    /* (non-Javadoc)
+	 * @see com.space.plugin.IPluginBase#getDependencies()
+	 */
+	@Override
 	public String[] getDependencies() {
 		String rawDependancies = config.getProperty("depend");
 		String[] retour = null;
@@ -160,11 +158,10 @@ public abstract class PluginBase{
 		return retour==null?new String[0]:retour;
 	}
 
-	/**
-	 * Return plugin jar name.
-	 * 
-	 * @return
+	/* (non-Javadoc)
+	 * @see com.space.plugin.IPluginBase#getJarName()
 	 */
+	@Override
 	public Object getJarName() {
 		String output;
 
@@ -281,6 +278,10 @@ public abstract class PluginBase{
 		return instance;
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.space.plugin.IPluginBase#getPath()
+	 */
+	@Override
 	public String getPath() {
 		return pluginJarName;
 	}
