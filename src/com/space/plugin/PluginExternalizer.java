@@ -29,9 +29,21 @@ public class PluginExternalizer extends PluginRunnable{
 	 * 
 	 * @param name plugin's name.
 	 * @return
+	 * @throws Exception 
 	 */
-	public Object runPlugin(String name) {
+	public Object runPlugin(String name) throws Exception {
 		return super.runPlugin(name);
+	}
+	
+	/**
+	 * Run the plugin <code>name</code> if found and if implements <code>IPluginRunnable</code>, null otherwise.
+	 * 
+	 * @param name plugin's name.
+	 * @return
+	 * @throws Exception 
+	 */
+	public Object runPlugin(String name, Object... args) throws Exception {
+		return super.runPlugin(name, args);
 	}
 	
 	/**
@@ -42,6 +54,11 @@ public class PluginExternalizer extends PluginRunnable{
 	 */
 	public List<String> getPluginImplementationsOf(Class<?> clazz) {
 		return super.getPluginImplementationsOf(clazz);
+	}
+	
+	@Deprecated
+	public PluginManager getPluginManager() {
+		return super.getPluginManager();
 	}
 	
 	/**

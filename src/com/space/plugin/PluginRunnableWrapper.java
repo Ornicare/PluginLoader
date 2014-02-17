@@ -30,12 +30,13 @@ public class PluginRunnableWrapper extends PluginBase implements IPluginRunnable
     	}*/
 		
 		//System.out.println(instance);
-
+		System.out.println(method.getParameterTypes().length);
 		method.invoke(instance);
 	}
 	
 	@Override
 	public void run(Object... args) throws Exception {
+		System.out.println("ffdsfdsfdsfds@@@@@@@@@@@@@@");
 		if(instance == null || classToLoad == null || method == null || !singleton) createRunMethodWithArgs();
 
 		method.invoke(instance);

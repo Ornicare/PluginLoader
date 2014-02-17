@@ -30,6 +30,14 @@ public abstract class PluginCommonMethods {
 	}
 	
 	/**
+	 * Dangerous !
+	 * @return
+	 */
+	protected PluginManager getPluginManager() {
+		return pluginManager;
+	}
+	
+	/**
 	 * Return a proxy of an instance of the main class of the plugin <code>name</code> if found, null otherwise.
 	 * 
 	 * @param name plugin's name.
@@ -50,14 +58,15 @@ public abstract class PluginCommonMethods {
 	 * 
 	 * @param name plugin's name.
 	 * @return
+	 * @throws Exception 
 	 * @throws SecurityException 
 	 * @throws NoSuchMethodException 
 	 */
-	public Object runPlugin(String name) {
+	public Object runPlugin(String name) throws Exception {
 		Class<PluginRunnable> l_oClazz = PluginRunnable.class;
         Method m = null;
 		try {
-			m = l_oClazz.getMethod("run", new Class[0]);
+			m = l_oClazz.getMethod("run");
 		} catch (NoSuchMethodException | SecurityException e1) {
 			e1.printStackTrace();
 			return null;
@@ -69,7 +78,54 @@ public abstract class PluginCommonMethods {
 	
         InvocationHandler l_oIh = Proxy.getInvocationHandler(l_oProxy);
         try {
+//        	System.out.println(m.getParameterTypes().length);
 			l_oIh.invoke(l_oProxy, m, null);
+		} catch (Throwable e) {
+			e.printStackTrace();
+			return null;
+		}
+		return l_oProxy;
+//		System.out.println("Pas lààààà !!!!");
+//		return runPlugin(name,new Object[0]);
+	}
+	
+	/**
+	 * Run the plugin <code>name</code> if found and if implements <code>IPluginRunnable</code>, and return it. Return null if it get an error.
+	 * 
+	 * @param name plugin's name.
+	 * @return
+	 * @throws Exception 
+	 * @throws SecurityException 
+	 * @throws NoSuchMethodException 
+	 */
+	public Object runPlugin(String name, Object... args) throws Exception {
+//		IPluginRunnable plugin = (IPluginRunnable) getPlugin(name);
+//		System.out.println("@@@@@"+args.length);
+//		System.out.println(((File)args[0]).getAbsolutePath());
+//		plugin.run("tessstt");
+//		return plugin;
+		Class<PluginRunnable> l_oClazz = PluginRunnable.class;
+        Method m = null;
+        Class<?>[] argsType = {new Object[0].getClass()};
+//        System.out.println(args.length);
+        if(args.length==0) {
+        	argsType = null;
+        	args = null;
+        }
+
+		try {
+			m = l_oClazz.getMethod("run", argsType);
+		} catch (NoSuchMethodException | SecurityException e1) {
+			e1.printStackTrace();
+			return null;
+		}
+        
+        PluginBase plugin = pluginManager.getPlugin(name);
+        Proxy l_oProxy = (Proxy) (plugin==null?null:plugin.getProxy());
+		if(l_oProxy==null) return null;
+        InvocationHandler l_oIh = Proxy.getInvocationHandler(l_oProxy);
+        try {
+			l_oIh.invoke(l_oProxy, m, args);
 		} catch (Throwable e) {
 			e.printStackTrace();
 			return null;
