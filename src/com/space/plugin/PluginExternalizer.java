@@ -8,6 +8,11 @@ import com.space.enums.LaunchPriority;
 
 public class PluginExternalizer extends PluginRunnable{
 
+	public PluginExternalizer(PluginManager pluginManager) {
+		this.registerPluginManager(pluginManager);
+	}
+	
+	
 	@Override
 	@LaunchInfo(priority = LaunchPriority.HIGHEST)
 	public void run() throws Exception {

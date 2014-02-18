@@ -270,6 +270,10 @@ public abstract class PluginBase implements IPluginBase{
 			
 			
 			instance = classToLoad.newInstance();
+			
+			
+			//Bug01 : static in PluginCommonMethods forbid use of multiples pluginsLoader
+			((PluginCommonMethods)instance).registerPluginManager(pluginManager);
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}

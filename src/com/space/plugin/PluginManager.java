@@ -2,6 +2,8 @@ package com.space.plugin;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -57,7 +59,12 @@ public class PluginManager {
 	 * @throws Exception 
      */
     public List<PluginBase> preLoadPlugins(File directory) throws Exception {
-        Validate.notNull(directory, "Directory cannot be null");
+        return preLoadPlugins(directory, false);
+    }
+    
+
+	public List<PluginBase> preLoadPlugins(File directory, boolean ignoreDirectory) throws FileNotFoundException, IOException {
+		Validate.notNull(directory, "Directory cannot be null");
         Validate.isTrue(directory.isDirectory(), "Directory must be a directory ["+directory.getAbsolutePath()+"]");
 
         List<PluginBase> result = new ArrayList<PluginBase>();
@@ -75,7 +82,7 @@ public class PluginManager {
                 	}
             	}
         	}
-        	else if(file.isDirectory()){
+        	else if(file.isDirectory() && !ignoreDirectory){
         		//TODO checkyChekoCheka
         		Properties config = new Properties();
         		config.load(new FileInputStream(new File(file.getAbsoluteFile()+"/plugin.properties")));
@@ -100,7 +107,8 @@ public class PluginManager {
         	}
         }*/
         return result;
-    }
+	}
+
 
     
     private void createGroupedClassLoaders(String path) {

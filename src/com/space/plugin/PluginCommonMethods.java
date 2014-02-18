@@ -12,19 +12,19 @@ import java.util.List;
  * @author Ornicare
  *
  */
-public abstract class PluginCommonMethods {
+public class PluginCommonMethods {
 	
-	private static boolean stopRegistration = false;
-	private static PluginManager pluginManager;
+	private boolean stopRegistration = false;
+	private PluginManager pluginManager;
 	
 	/**
 	 * Used to register the plugin manager. Dont' touch it !
 	 * 
 	 * @param pluginManager
 	 */
-	public static final void registerPluginManager(PluginManager pluginManager) {
+	public final void registerPluginManager(PluginManager pluginManager) {
 		if(!stopRegistration) {
-			PluginCommonMethods.pluginManager = pluginManager;
+			this.pluginManager = pluginManager;
 			stopRegistration = true;
 		}
 	}
@@ -119,7 +119,6 @@ public abstract class PluginCommonMethods {
 			e1.printStackTrace();
 			return null;
 		}
-        
         PluginBase plugin = pluginManager.getPlugin(name);
         Proxy l_oProxy = (Proxy) (plugin==null?null:plugin.getProxy());
 		if(l_oProxy==null) return null;

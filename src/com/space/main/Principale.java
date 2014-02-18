@@ -7,7 +7,6 @@ import java.util.Map;
 
 import com.space.enums.LaunchPriority;
 import com.space.plugin.PluginBase;
-import com.space.plugin.PluginCommonMethods;
 import com.space.plugin.PluginManager;
 import com.space.plugin.PluginRunnableWrapper;
 
@@ -32,7 +31,8 @@ public class Principale {
 		/*
 		 * Register it.
 		 */
-		PluginCommonMethods.registerPluginManager(pluginManager);
+//		PluginCommonMethods pCM = new PluginCommonMethods();
+//		pCM.registerPluginManager(pluginManager);
 		
 		/*
 		 * Load the "plugins" folder.
