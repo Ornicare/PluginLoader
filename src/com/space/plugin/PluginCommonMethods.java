@@ -124,7 +124,7 @@ public class PluginCommonMethods {
 		if(l_oProxy==null) return null;
         InvocationHandler l_oIh = Proxy.getInvocationHandler(l_oProxy);
         try {
-			l_oIh.invoke(l_oProxy, m, args);
+			l_oIh.invoke(l_oProxy, m, new Object[]{args});
 		} catch (Throwable e) {
 			e.printStackTrace();
 			return null;

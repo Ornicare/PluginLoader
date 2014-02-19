@@ -54,12 +54,37 @@ public class InstanceHandler implements InvocationHandler{
 //			}
 //			else {
 //			System.out.println(m.getName());
-			if(m.getParameterTypes()[0].isArray() && !args[0].getClass().isArray() && args.length<2) {
-				return m.invoke(realObject, new Object[]{args});
-			}
-			else {
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+//			if(m.getParameterTypes()[0].isArray() && !args[0].getClass().isArray() && args.length<2) {
+//				return m.invoke(realObject, new Object[]{args});
+//			}
+//			else {
 				return m.invoke(realObject, args);
-			}
+//			}
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 //			if(m.getParameterTypes()[0].isArray() && !(args[0].getClass().isArray()) && !(((Object[])args[0]).length==1)) {
 //				return m.invoke(realObject, new Object[]{args});
 //			}
